@@ -1,14 +1,52 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createReadClient } from "@/lib/supabase";
 import { CaseStudyDetailImage } from "@/components/shared/CaseStudyDetailImage";
+import { JsonLd } from "@/components/shared/JsonLd";
 import type { CaseStudy } from "@/types/supabase";
 
 export async function generateStaticParams() {
   const supabase = createReadClient();
   const { data } = await supabase.from("case_studies").select("slug");
   return (data ?? []).map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const supabase = createReadClient();
+  const { data } = await supabase
+    .from("case_studies")
+    .select("client_name, tagline, slug")
+    .eq("slug", slug)
+    .single();
+
+  if (!data) return { title: "Case Study Not Found" };
+
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${data.slug}.jpg`;
+
+  return {
+    title: `${data.client_name} — Case Study`,
+    description: data.tagline,
+    openGraph: {
+      title: `${data.client_name} — Case Study | Poole Media`,
+      description: data.tagline,
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: data.client_name }],
+      type: "article",
+      url: `https://poole.media/case-studies/${data.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${data.client_name} — Case Study`,
+      description: data.tagline,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function CaseStudyPage({
@@ -29,8 +67,35 @@ export default async function CaseStudyPage({
   const cs = data as CaseStudy;
   const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${cs.slug}.jpg`;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://poole.media",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case Studies",
+        item: "https://poole.media/case-studies",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: cs.client_name,
+        item: `https://poole.media/case-studies/${cs.slug}`,
+      },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
+
       {/* Back nav */}
       <div className="pt-28 pb-4 bg-[#080810]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -64,10 +129,8 @@ export default async function CaseStudyPage({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Main content */}
             <div className="lg:col-span-2 space-y-10">
-              {/* Image */}
               <CaseStudyDetailImage src={imageUrl} alt={cs.client_name} />
 
-              {/* Description */}
               <div>
                 <h2 className="font-display text-2xl font-semibold text-white mb-4">
                   About the Project
@@ -77,7 +140,6 @@ export default async function CaseStudyPage({
                 </p>
               </div>
 
-              {/* Results */}
               <div>
                 <h2 className="font-display text-2xl font-semibold text-white mb-4">
                   Results

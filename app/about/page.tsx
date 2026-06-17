@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin, ArrowRight, Zap, Shield, BarChart3 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About — AI-Driven Marketing Agency in Tri-Cities, WA",
+  description:
+    "Poole Media is a digital marketing agency in Tri-Cities, WA. We help small and mid-sized businesses compete and win in the era of AI-powered search.",
+  openGraph: {
+    title: "About Poole Media — AI-Driven Marketing Agency",
+    description:
+      "Based in Tri-Cities, WA. We build fast websites, optimize for AI search, and automate email marketing so local businesses can compete with anyone.",
+    type: "website",
+    url: "https://poole.media/about",
+  },
+};
 
 const VALUES = [
   {

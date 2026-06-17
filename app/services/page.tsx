@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Globe, Search, Mail, Check, ArrowRight } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Services — Website Dev, AI SEO & Email Marketing",
+  description:
+    "Explore Poole Media's three core services: custom website development, AI-Ready SEO for ChatGPT, Perplexity & Google, and automated email marketing that converts.",
+  openGraph: {
+    title: "Services — Website Dev, AI SEO & Email Marketing",
+    description:
+      "Custom websites that load in under 2 seconds, AI search optimization, and automated email campaigns for local businesses.",
+    type: "website",
+    url: "https://poole.media/services",
+  },
+};
 
 const SERVICES = [
   {

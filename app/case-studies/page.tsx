@@ -1,4 +1,18 @@
+import type { Metadata } from "next";
 import { createReadClient } from "@/lib/supabase";
+
+export const metadata: Metadata = {
+  title: "Case Studies — Real Results for Real Businesses",
+  description:
+    "See how Poole Media has helped local businesses across Washington grow their online presence with AI-powered websites, SEO, and email marketing.",
+  openGraph: {
+    title: "Case Studies — Real Results for Real Businesses",
+    description:
+      "Real results from real businesses. Explore our work building fast, AI-ready websites for local companies.",
+    type: "website",
+    url: "https://poole.media/case-studies",
+  },
+};
 import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
 
 export default async function CaseStudiesPage() {

@@ -20,19 +20,48 @@ const jetbrainsMono = JetBrains_Mono({
 // through the --font-cal CSS variable defined in :root
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://poole.media"
+  ),
   title: {
-    default: "Poole Media | AI-Powered Digital Marketing",
+    default: "Poole Media — AI-Driven Digital Marketing | Tri-Cities, WA",
     template: "%s | Poole Media",
   },
   description:
     "Poole Media helps small and mid-sized businesses in Tri-Cities, WA get found in AI search, rank on Google, and grow online with AI-driven digital marketing.",
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://poole.media"
-  ),
+  keywords: [
+    "digital marketing",
+    "AI SEO",
+    "website development",
+    "email marketing",
+    "Tri-Cities WA",
+    "Kennewick",
+    "Richland",
+    "Pasco",
+    "ChatGPT SEO",
+    "Perplexity SEO",
+    "local SEO",
+  ],
+  authors: [{ name: "Poole Media" }],
+  creator: "Poole Media",
   openGraph: {
     siteName: "Poole Media",
     locale: "en_US",
     type: "website",
+    url: "https://poole.media",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
   },
 };
 

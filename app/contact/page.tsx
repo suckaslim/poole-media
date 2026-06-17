@@ -1,5 +1,40 @@
+import type { Metadata } from "next";
 import { Mail, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
+import { JsonLd } from "@/components/shared/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Contact — Book Your Free Digital Marketing Audit",
+  description:
+    "Book a free 30-minute digital marketing audit. We'll review your online presence and give you a clear action plan — no commitment required.",
+  openGraph: {
+    title: "Contact Poole Media — Book Your Free Audit",
+    description:
+      "Get a free 30-minute audit. We'll identify your biggest growth opportunities and give you a clear action plan.",
+    type: "website",
+    url: "https://poole.media/contact",
+  },
+};
+
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Poole Media",
+  url: "https://poole.media",
+  email: "contact@poole.media",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Kennewick",
+    addressRegion: "WA",
+    addressCountry: "US",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "contact@poole.media",
+    availableLanguage: "English",
+  },
+};
 
 const CONTACT_INFO = [
   {
@@ -25,6 +60,7 @@ const CONTACT_INFO = [
 export default function ContactPage() {
   return (
     <main>
+      <JsonLd data={contactPageSchema} />
       {/* Hero */}
       <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-[#080810] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
