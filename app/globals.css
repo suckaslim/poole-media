@@ -1,3 +1,12 @@
+/* Cal Sans Display — self-hosted, referenced via CSS var below */
+@font-face {
+  font-family: "Cal Sans";
+  src: url("/fonts/CalSans-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -7,9 +16,18 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+
+  /* Brand accent colors — used via bg-brand, text-brand, etc. */
+  --color-brand: var(--brand);
+  --color-brand-violet: var(--brand-violet);
+
+  /* Fonts */
+  --font-sans: var(--font-inter);     /* set by next/font Inter class on <html> */
+  --font-mono: var(--font-jetbrains); /* set by next/font JetBrains class on <html> */
+  --font-heading: var(--font-cal);    /* Cal Sans via @font-face + :root CSS var */
+  --font-display: var(--font-cal);
+
+  /* shadcn component tokens */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,7 +66,17 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ─── CSS custom properties ─────────────────────────────────────────────── */
+
 :root {
+  /* Brand accent — identical in light and dark */
+  --brand: #6366f1;
+  --brand-violet: #8b5cf6;
+
+  /* Cal Sans CSS variable (used in @theme via --font-display) */
+  --font-cal: "Cal Sans", system-ui, sans-serif;
+
+  /* Light mode (fallback — this site is dark-first) */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -84,47 +112,76 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Design-system backgrounds */
+  --background: oklch(0.058 0 0);         /* ≈ #0a0a0a */
+  --foreground: oklch(0.97 0 0);          /* near-white */
+  --card: oklch(0.1 0.005 264);           /* #0f0f18 — blue-tinted card bg */
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.1 0.005 264);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: var(--brand);                /* #6366f1 */
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.16 0.005 264);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.16 0.005 264);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.16 0.005 264);
+  --accent-foreground: oklch(0.97 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: var(--brand);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar: oklch(0.1 0.005 264);
+  --sidebar-foreground: oklch(0.97 0 0);
+  --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-accent: oklch(0.16 0.005 264);
+  --sidebar-accent-foreground: oklch(0.97 0 0);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: var(--brand);
 }
+
+/* ─── Utilities ─────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  /* Brand gradient text — used on logo and key headlines */
+  .text-gradient {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Brand gradient background — used on CTAs */
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  }
+
+  /* Glow effect for brand elements */
+  .shadow-brand {
+    box-shadow: 0 0 24px 0 rgb(99 102 241 / 0.25);
+  }
+
+  .shadow-brand-lg {
+    box-shadow: 0 0 48px 0 rgb(99 102 241 / 0.3);
+  }
+}
+
+/* ─── Base layer ─────────────────────────────────────────────────────────── */
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
+    @apply scroll-smooth font-sans;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
   }
 }
