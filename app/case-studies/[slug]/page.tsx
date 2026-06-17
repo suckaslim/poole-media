@@ -1,3 +1,141 @@
-export default function CaseStudyPage() {
-  return <main />;
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { createReadClient } from "@/lib/supabase";
+import { CaseStudyDetailImage } from "@/components/shared/CaseStudyDetailImage";
+import type { CaseStudy } from "@/types/supabase";
+
+export async function generateStaticParams() {
+  const supabase = createReadClient();
+  const { data } = await supabase.from("case_studies").select("slug");
+  return (data ?? []).map(({ slug }) => ({ slug }));
+}
+
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const supabase = createReadClient();
+  const { data } = await supabase
+    .from("case_studies")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (!data) notFound();
+
+  const cs = data as CaseStudy;
+  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${cs.slug}.jpg`;
+
+  return (
+    <main>
+      {/* Back nav */}
+      <div className="pt-28 pb-4 bg-[#080810]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link
+            href="/case-studies"
+            className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors duration-200"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            All Case Studies
+          </Link>
+        </div>
+      </div>
+
+      {/* Hero */}
+      <section className="relative pb-16 bg-[#080810] overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.1),transparent)]" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
+            Case Study
+          </p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-4">
+            {cs.client_name}
+          </h1>
+          <p className="text-xl text-white/55 max-w-2xl">{cs.tagline}</p>
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="py-16 md:py-24 bg-[#0a0a0a]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+            {/* Main content */}
+            <div className="lg:col-span-2 space-y-10">
+              {/* Image */}
+              <CaseStudyDetailImage src={imageUrl} alt={cs.client_name} />
+
+              {/* Description */}
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-white mb-4">
+                  About the Project
+                </h2>
+                <p className="text-white/60 leading-relaxed text-lg">
+                  {cs.description}
+                </p>
+              </div>
+
+              {/* Results */}
+              <div>
+                <h2 className="font-display text-2xl font-semibold text-white mb-4">
+                  Results
+                </h2>
+                <div className="rounded-2xl border border-[#6366f1]/20 bg-[#6366f1]/5 p-6">
+                  <p className="text-white/70 leading-relaxed">{cs.results}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-5">
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-5">
+                  Project Details
+                </h3>
+                <dl className="space-y-4">
+                  <div>
+                    <dt className="text-xs text-white/40 mb-1">Client</dt>
+                    <dd className="text-sm font-medium text-white">
+                      {cs.client_name}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-white/40 mb-1">Agency</dt>
+                    <dd className="text-sm font-medium text-white">
+                      Poole Media
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs text-white/40 mb-1">Location</dt>
+                    <dd className="text-sm font-medium text-white">
+                      Tri-Cities, WA
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6">
+                <h3 className="text-sm font-semibold text-white mb-2">
+                  Want similar results?
+                </h3>
+                <p className="text-sm text-white/50 mb-5 leading-relaxed">
+                  Book a free audit and we&apos;ll show you what&apos;s possible
+                  for your business.
+                </p>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 w-full justify-center rounded-lg bg-gradient-brand px-4 py-3 text-sm font-semibold text-white hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
+                >
+                  Get Free Audit
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
 }
