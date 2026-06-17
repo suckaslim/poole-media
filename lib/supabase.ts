@@ -1,14 +1,19 @@
-import { createBrowserClient } from "@supabase/ssr";
-import { createServerClient } from "@supabase/ssr";
+import { createBrowserClient, createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import type { Database } from "@/types/supabase";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-// Use in Client Components
-export function createClient() {
+// Use in Client Components (browser)
+export function createBrowserSupabaseClient() {
   return createBrowserClient<Database>(supabaseUrl, supabaseAnonKey);
+}
+
+// Use in Server Components reading public data — no cookie handling, page stays static-renderable
+export function createReadClient() {
+  return createClient<Database>(supabaseUrl, supabaseAnonKey);
 }
 
 // Use in Server Components, Server Actions, and Route Handlers
