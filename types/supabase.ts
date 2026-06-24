@@ -22,6 +22,7 @@ export type Database = {
           description: string
           featured: boolean
           id: string
+          image_ext: string | null
           results: string
           slug: string
           tagline: string
@@ -32,6 +33,7 @@ export type Database = {
           description: string
           featured?: boolean
           id?: string
+          image_ext?: string | null
           results: string
           slug: string
           tagline: string
@@ -42,6 +44,7 @@ export type Database = {
           description?: string
           featured?: boolean
           id?: string
+          image_ext?: string | null
           results?: string
           slug?: string
           tagline?: string

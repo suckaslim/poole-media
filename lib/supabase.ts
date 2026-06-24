@@ -13,7 +13,11 @@ export function createBrowserSupabaseClient() {
 
 // Use in Server Components reading public data — no cookie handling, page stays static-renderable
 export function createReadClient() {
-  return createClient<Database>(supabaseUrl, supabaseAnonKey);
+  return createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    global: {
+      fetch: (url, options) => fetch(url, { ...options, cache: "no-store" }),
+    },
+  });
 }
 
 // Use in Server Components, Server Actions, and Route Handlers

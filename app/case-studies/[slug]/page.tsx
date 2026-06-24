@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -5,7 +6,16 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { createReadClient } from "@/lib/supabase";
 import { CaseStudyDetailImage } from "@/components/shared/CaseStudyDetailImage";
 import { JsonLd } from "@/components/shared/JsonLd";
-import type { CaseStudy } from "@/types/supabase";
+
+const getCaseStudy = cache(async (slug: string) => {
+  const supabase = createReadClient();
+  const { data } = await supabase
+    .from("case_studies")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+  return data;
+});
 
 export async function generateStaticParams() {
   const supabase = createReadClient();
@@ -19,16 +29,13 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const supabase = createReadClient();
-  const { data } = await supabase
-    .from("case_studies")
-    .select("client_name, tagline, slug")
-    .eq("slug", slug)
-    .single();
+  const data = await getCaseStudy(slug);
 
   if (!data) return { title: "Case Study Not Found" };
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${data.slug}.jpg`;
+  const imageUrl = data.image_ext
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${data.slug}.${data.image_ext}`
+    : null;
 
   return {
     title: `${data.client_name} — Case Study`,
@@ -36,7 +43,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${data.client_name} — Case Study | Poole Media`,
       description: data.tagline,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: data.client_name }],
+      images: [{ url: imageUrl ? imageUrl : "", width: 1200, height: 630, alt: data.client_name }],
       type: "article",
       url: `https://poole.media/case-studies/${data.slug}`,
     },
@@ -44,7 +51,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${data.client_name} — Case Study`,
       description: data.tagline,
-      images: [imageUrl],
+      images: [imageUrl ? imageUrl : ""],
     },
   };
 }
@@ -55,17 +62,13 @@ export default async function CaseStudyPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const supabase = createReadClient();
-  const { data } = await supabase
-    .from("case_studies")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const cs = await getCaseStudy(slug);
 
-  if (!data) notFound();
+  if (!cs) notFound();
 
-  const cs = data as CaseStudy;
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${cs.slug}.jpg`;
+  const imageUrl = cs.image_ext
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${cs.slug}.${cs.image_ext}`
+    : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

@@ -11,7 +11,9 @@ interface CaseStudyCardProps {
 
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const [imageError, setImageError] = useState(false);
-  const imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${caseStudy.slug}.jpg`;
+  const imageUrl = caseStudy.image_ext
+    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${caseStudy.slug}.${caseStudy.image_ext}`
+    : null;
 
   return (
     <Link
@@ -20,7 +22,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
     >
       {/* Image / Gradient placeholder */}
       <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#6366f1]/20 via-[#080818] to-[#8b5cf6]/20">
-        {!imageError && (
+        {imageUrl && !imageError && (
           // eslint-disable-next-line @next/next-eslint/no-img-element
           <img
             src={imageUrl}

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Particles, {
@@ -78,8 +79,18 @@ const ParticlesCanvas: FC = () => {
 };
 
 export function Hero() {
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
+  // Fade out as the indicator moves away from the bottom of the viewport
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0.15, 0.4], [1, 0]);
+
+  // Collapse height + margin once opacity has reached zero
+  const [collapsed, setCollapsed] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (p) => setCollapsed(p > 0.45));
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080810]">
+    <section ref={heroRef} style={{ minHeight: "100svh" }} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#080810]">
       {/* Particle field */}
       <ParticlesProvider init={initParticles}>
         <ParticlesCanvas />
@@ -147,19 +158,30 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator — outer handles scroll-based fade + collapse, inner handles entry animation */}
         <motion.div
-          variants={fadeUp}
-          className="mt-20 flex justify-center"
+          style={{ opacity: scrollIndicatorOpacity }}
+          initial={{ marginTop: "5rem" }}
+          animate={{
+            height: collapsed ? 0 : "auto",
+            marginTop: collapsed ? 0 : "5rem",
+          }}
+          transition={{ duration: 0.15 }}
+          className="overflow-hidden flex justify-center"
           aria-hidden="true"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            variants={fadeUp}
             className="flex flex-col items-center gap-2 text-white/25"
           >
-            <div className="h-8 w-px rounded-full bg-gradient-to-b from-transparent to-white/30" />
-            <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+            <motion.div
+              animate={{ y: [0, 4, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center gap-2"
+            >
+              <div className="h-8 w-px rounded-full bg-gradient-to-b from-transparent to-white/30" />
+              <span className="text-[10px] uppercase tracking-widest">Scroll</span>
+            </motion.div>
           </motion.div>
         </motion.div>
       </motion.div>

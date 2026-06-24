@@ -4,25 +4,18 @@ import { Star } from "lucide-react";
 const TESTIMONIALS = [
   {
     quote:
-      "[TESTIMONIAL PLACEHOLDER] — Add a real client quote here describing their experience working with Poole Media and the results they saw.",
-    name: "[Client Name]",
-    role: "[Title]",
-    company: "[Company Name]",
+      "Working with Poole Media has been a game-changer for our business. They are truly masters at their craft, and their work has helped us reach new heights. We couldn't be happier with the results!",
+    name: "Austin Kautzman",
+    role: "Owner/Operator",
+    company: "Humble Home Solutions LLC",
   },
   {
     quote:
-      "[TESTIMONIAL PLACEHOLDER] — Add a second real client quote here. Focus on a specific result or transformation.",
-    name: "[Client Name]",
-    role: "[Title]",
-    company: "[Company Name]",
-  },
-  {
-    quote:
-      "[TESTIMONIAL PLACEHOLDER] — Add a third real client quote here. Ideally from a different service category.",
-    name: "[Client Name]",
-    role: "[Title]",
-    company: "[Company Name]",
-  },
+      "The team at Poole Media is exceptional. Their expertise and dedication to our project were evident from the start. They delivered beyond our expectations, and we are thrilled with the outcome.",
+    name: "Dr. Craig Christian",
+    role: "Founder & Practicing Dentist",
+    company: "Riverstone Dental",
+  }
 ];
 
 function StarRating() {
@@ -51,7 +44,7 @@ export function Testimonials() {
         </div>
 
         {/* Testimonial cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {TESTIMONIALS.map((t, i) => (
             <figure
               key={i}
