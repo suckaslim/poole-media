@@ -93,12 +93,17 @@ export async function submitContactForm(
           </div>
         `,
       }),
-      resend.emails.send({
-        from: "Poole Media <contact@poole.media>",
-        to: "15098996505@vtext.com",
-        subject: "",
-        text: "Someone made an inquiry at Poole Media, check your email!",
-      }),
+      fetch(
+        `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: process.env.TELEGRAM_CHAT_ID,
+            text: "Someone made an inquiry at Poole Media, check your email!",
+          }),
+        }
+      ),
     ]);
   } catch (err) {
     console.error("Resend email error:", err);
