@@ -49,9 +49,20 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     url: "https://poole.media",
+    images: [
+      {
+        url: "/images/poole_media_logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Poole Media — AI-Driven Digital Marketing",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
+  },
+  other: {
+    "facebook-domain-verification": "x323twzhobg6kcabls7z7kjgzc4iqn",
   },
   robots: {
     index: true,
