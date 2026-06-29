@@ -9,7 +9,7 @@ const FAQ_ITEMS = [
   {
     question: "What services do you offer?",
     answer:
-      "We provide digital marketing including AI-Ready SEO, website development, and email campaigns — all engineered to make your business visible across the new landscape of AI-powered search.",
+      "We offer four core services: Website Design and Build, Agentic SEO, AI-Assisted Content, and Site Maintenance — all engineered to make your business visible on Google and across AI search platforms like ChatGPT, Perplexity, and Grok.",
   },
   {
     question: "How long are contracts?",

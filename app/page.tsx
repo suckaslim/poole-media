@@ -3,13 +3,13 @@ import { JsonLd } from "@/components/shared/JsonLd";
 import { Hero } from "@/components/sections/Hero";
 
 export const metadata: Metadata = {
-  title: "Poole Media — AI-Driven Digital Marketing | Tri-Cities, WA",
+  title: "Poole Media — Agentic SEO and Website Development | Tri-Cities, WA",
   description:
-    "We build sub-2-second websites, optimize for AI search (ChatGPT, Perplexity, Grok & Google), and automate email marketing for small businesses in Tri-Cities, WA and beyond.",
+    "We build custom websites and run continuous agentic SEO — so your business shows up on Google, ChatGPT, Perplexity, and Grok. Serving Tri-Cities, WA and beyond.",
   openGraph: {
-    title: "Poole Media — AI-Driven Digital Marketing | Tri-Cities, WA",
+    title: "Poole Media — Agentic SEO and Website Development | Tri-Cities, WA",
     description:
-      "Sub-2-second websites, AI search optimization, and automated email marketing. Get found everywhere your customers are searching.",
+      "Custom websites and continuous agentic SEO. Get found on Google, ChatGPT, Perplexity, and Grok.",
     type: "website",
     url: "https://poole.media",
   },
@@ -20,7 +20,7 @@ const localBusinessSchema = {
   "@type": "LocalBusiness",
   name: "Poole Media",
   description:
-    "AI-driven digital marketing agency in Tri-Cities, WA specializing in website development, AI-Ready SEO, and email marketing.",
+    "AI-driven digital marketing agency in Tri-Cities, WA specializing in website development, agentic SEO, AI-assisted content, and site maintenance.",
   url: "https://poole.media",
   email: "contact@poole.media",
   address: {
@@ -36,9 +36,10 @@ const localBusinessSchema = {
     { "@type": "State", name: "Washington" },
   ],
   serviceType: [
-    "Website Development",
-    "AI-Ready SEO",
-    "Email Marketing",
+    "Website Design and Build",
+    "Agentic SEO",
+    "AI-Assisted Content",
+    "Site Maintenance",
     "Digital Marketing",
   ],
   priceRange: "$$",

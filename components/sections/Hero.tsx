@@ -133,9 +133,8 @@ export function Hero() {
           variants={fadeUp}
           className="mt-8 mx-auto max-w-2xl text-lg md:text-xl text-white/55 leading-relaxed"
         >
-          We build sub-2-second websites, rank your business across AI platforms
-          (ChatGPT, Perplexity, Grok &amp; Google), and automate email marketing
-          that fills your calendar.
+          We build sub-2-second websites and run continuous agentic SEO — so
+          your business gets found on Google, ChatGPT, Perplexity, and Grok.
         </motion.p>
 
         {/* CTAs */}

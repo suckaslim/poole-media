@@ -26,7 +26,15 @@ const faqSchema = {
       name: "What services do you offer?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We provide digital marketing including AI-Ready SEO, website development, and email campaigns — all engineered to make your business visible across the new landscape of AI-powered search and traditional search engines.",
+        text: "We offer four core services: Website Design and Build, Agentic SEO, AI-Assisted Content, and Site Maintenance. Everything is built for the AI search era — so your business gets found on Google, ChatGPT, Perplexity, and Grok.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is agentic SEO?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Agentic SEO is continuous search optimization run by AI agents and reviewed by a human strategist before anything ships. Instead of a quarterly report, you get monthly fixes, keyword updates, and ranking improvements delivered as an ongoing system. We optimize for both traditional Google rankings and AI search platforms like ChatGPT, Perplexity, and Grok.",
       },
     },
     {

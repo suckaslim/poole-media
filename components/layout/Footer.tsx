@@ -3,9 +3,10 @@ import Link from "next/link";
 import { MapPin } from "lucide-react";
 
 const SERVICE_LINKS = [
-  { label: "Website Development", href: "/services#web-development" },
-  { label: "AI-Ready SEO", href: "/services#ai-seo" },
-  { label: "Email Marketing", href: "/services#email-marketing" },
+  { label: "Website Design and Build", href: "/services#website" },
+  { label: "Agentic SEO", href: "/services#agentic-seo" },
+  { label: "AI-Assisted Content", href: "/services#ai-content" },
+  { label: "Site Maintenance", href: "/services#site-maintenance" },
 ];
 
 const COMPANY_LINKS = [

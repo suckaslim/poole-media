@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Globe, Search, Mail, Check, ArrowRight } from "lucide-react";
+import { Globe, Search, Bot, Shield, Check, ArrowRight } from "lucide-react";
+import { WaitlistForm } from "@/components/sections/WaitlistForm";
 
 export const metadata: Metadata = {
-  title: "Services — Website Dev, AI SEO & Email Marketing",
+  title: "Services — Website Development, Agentic SEO and AI Content",
   description:
-    "Explore Poole Media's three core services: custom website development, AI-Ready SEO for ChatGPT, Perplexity & Google, and automated email marketing that converts.",
+    "Custom Next.js websites, continuous agentic SEO, AI-assisted content, and site maintenance. No contracts. Built for the AI search era.",
   openGraph: {
-    title: "Services — Website Dev, AI SEO & Email Marketing",
+    title: "Services — Website Development, Agentic SEO and AI Content | Poole Media",
     description:
-      "Custom websites that load in under 2 seconds, AI search optimization, and automated email campaigns for local businesses.",
+      "Custom Next.js websites, continuous agentic SEO, AI-assisted content, and site maintenance. No contracts. Built for the AI search era.",
     type: "website",
     url: "https://poole.media/services",
   },
@@ -17,61 +18,85 @@ export const metadata: Metadata = {
 
 const SERVICES = [
   {
+    id: "website",
     icon: Globe,
-    name: "Website Development",
+    name: "Website Design and Build",
+    price: "$1,500–$4,000",
+    priceLabel: "One-time project fee",
     tagline: "Fast, modern, mobile-first websites built to convert.",
     description:
-      "We build custom websites that load in under 2 seconds, look stunning on every device, and are architected from the ground up for search engines — including AI-powered ones. No bloated page builders. No templates that look like everyone else's. Clean code, purposeful design, and results-focused execution.",
+      "Custom Next.js site, mobile-first, sub-2-second load times, structured for AI search from day one. Includes on-page SEO setup, schema markup, and sitemap. No templates — clean code built to convert.",
     features: [
-      "Sub-2-second load times, guaranteed",
+      "Sub-2-second load times guaranteed",
       "Mobile-first responsive design",
-      "SEO-ready architecture from day one",
+      "AI-search-ready architecture (GEO + AEO)",
+      "Schema markup and structured data",
       "Custom design — no templates",
-      "Performance-optimized images and code",
-      "Built on modern frameworks (Next.js + React)",
-      "Structured data & schema markup",
+      "Built on Next.js + React",
       "Ongoing support available",
     ],
     ideal:
-      "Small businesses, service providers, and local brands that want a site that actually brings in customers.",
+      "Local and regional businesses that need a site that actually brings in customers.",
   },
   {
+    id: "agentic-seo",
     icon: Search,
-    name: "AI-Ready SEO",
-    tagline: "Get found across every search engine — AI and traditional.",
+    name: "Agentic SEO",
+    price: "$500–$1,500/mo",
+    priceLabel: "Monthly retainer",
+    tagline: "Continuous SEO run by AI agents, reviewed by a human.",
     description:
-      "Search has fundamentally changed. ChatGPT, Perplexity, and Grok now answer questions that used to send traffic directly to your website. We optimize for both the new AI search engines and traditional Google rankings, so wherever your customers are searching, they find you first.",
+      "Continuous technical SEO run by AI agents, reviewed by a senior strategist before anything ships. Keyword gap analysis, internal linking, on-page fixes, and AI-search optimization — delivered as a living system, not a quarterly report.",
     features: [
-      "AI search engine optimization (ChatGPT, Perplexity, Grok)",
-      "Traditional Google & Bing ranking strategy",
-      "Local SEO for your service area",
-      "Content that AI systems cite and recommend",
-      "Schema markup and structured data",
-      "Monthly performance reporting",
-      "Keyword and competitor analysis",
-      "Backlink strategy and outreach",
+      "72-hour initial audit",
+      "Technical SEO fixes applied monthly",
+      "Keyword and competitor gap analysis",
+      "Internal linking optimization",
+      "AI search engine optimization (GEO + AEO)",
+      "On-page content optimization",
+      "Monthly ranking and traffic summary",
+      "No lock-in contracts",
     ],
     ideal:
-      "Local businesses trying to stand out in an increasingly AI-mediated search landscape.",
+      "Businesses that want to rank on Google AND show up when customers ask ChatGPT, Perplexity, or Grok for recommendations.",
   },
   {
-    icon: Mail,
-    name: "Email Marketing",
-    tagline: "Automated campaigns that fill your calendar on autopilot.",
+    id: "ai-content",
+    icon: Bot,
+    name: "AI-Assisted Content",
+    price: "$300–$800/mo",
+    priceLabel: "Monthly retainer",
+    tagline: "SEO-targeted content, drafted by AI, approved by you.",
     description:
-      "Email remains the highest ROI marketing channel — when it's done right. We design and build automated email sequences that welcome new leads, nurture prospects over time, win back old customers, and drive consistent bookings or sales without you lifting a finger.",
+      "2–4 SEO-optimized blog posts or landing pages per month. AI-drafted, human-reviewed, client-approved before publishing. Targets keywords surfaced by the Agentic SEO service — the two compound together.",
     features: [
-      "Automated welcome and nurture sequences",
-      "Win-back campaigns for lapsed customers",
-      "Promotional campaign design and copy",
-      "List segmentation and personalization",
-      "A/B testing for subject lines and content",
-      "Performance tracking and optimization",
-      "CRM integration setup",
-      "Monthly campaign execution",
+      "2–4 pieces of content per month",
+      "SEO-targeted topics based on keyword research",
+      "AI-drafted, human-reviewed for accuracy and brand voice",
+      "Client approval before publishing",
+      "Internal linking to support SEO",
+      "Consistent publishing cadence",
     ],
     ideal:
-      "Businesses with an email list they're underutilizing, or anyone who wants leads nurtured automatically.",
+      "Businesses that know they need content but don't have the time or team to produce it consistently.",
+  },
+  {
+    id: "site-maintenance",
+    icon: Shield,
+    name: "Site Maintenance",
+    price: "$100–$200/mo",
+    priceLabel: "Monthly",
+    tagline: "Your site stays fast, secure, and current.",
+    description:
+      "Hosting management, dependency updates, uptime monitoring, and minor copy edits. Low overhead for the client, high value for retention.",
+    features: [
+      "Hosting management",
+      "Dependency and security updates",
+      "Uptime monitoring",
+      "Minor copy and image updates",
+      "Priority support response",
+    ],
+    ideal: "Any client who wants their site managed without thinking about it.",
   },
 ];
 
@@ -90,8 +115,8 @@ export default function ServicesPage() {
             <span className="text-gradient">grow online</span>
           </h1>
           <p className="text-xl text-white/55 leading-relaxed max-w-2xl mx-auto mb-10">
-            Three core services, all AI-first, all engineered to make your
-            business impossible to ignore — online and in AI search.
+            Four core services, all AI-first, all engineered to make your
+            business impossible to ignore — on Google and in AI search.
           </p>
           <Link
             href="/contact"
@@ -111,7 +136,8 @@ export default function ServicesPage() {
             const flip = index % 2 === 1;
             return (
               <div
-                key={service.name}
+                key={service.id}
+                id={service.id}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start ${flip ? "lg:grid-flow-dense" : ""}`}
               >
                 {/* Text */}
@@ -124,9 +150,15 @@ export default function ServicesPage() {
                       {service.name}
                     </span>
                   </div>
-                  <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">
+                  <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white mb-3">
                     {service.tagline}
                   </h2>
+                  <p className="text-sm font-medium text-[#6366f1] mb-4">
+                    {service.price}{" "}
+                    <span className="text-white/30 font-normal">
+                      · {service.priceLabel}
+                    </span>
+                  </p>
                   <p className="text-white/55 leading-relaxed mb-6">
                     {service.description}
                   </p>
@@ -164,6 +196,53 @@ export default function ServicesPage() {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Coming soon */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a] border-t border-white/[0.04]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10">
+            <span className="inline-flex items-center rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/40 mb-5">
+              Coming Soon
+            </span>
+            <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white/50 mb-3">
+              What&apos;s next
+            </h2>
+            <p className="text-white/30 leading-relaxed max-w-xl">
+              More AI-powered tools for local businesses — in development now.
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-white/[0.06] bg-white/[0.01] p-8 md:p-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+              {/* Service description */}
+              <div>
+                <h3 className="font-display text-2xl font-semibold text-white/50 mb-3">
+                  AI Review Management
+                </h3>
+                <p className="text-white/30 leading-relaxed mb-4">
+                  Automatically respond to Google, Yelp, and Facebook reviews
+                  with context-aware replies that don&apos;t sound automated.
+                  Negative reviews trigger an alert to the business owner before
+                  anything posts.
+                </p>
+                <p className="text-white/30 leading-relaxed">
+                  Includes a monthly competitor review intelligence report — the
+                  top pain points customers leave for your competitors, turned
+                  into a marketing brief.
+                </p>
+              </div>
+
+              {/* Waitlist */}
+              <div>
+                <p className="text-sm font-medium text-white/40 mb-4">
+                  Join the waitlist — be first to know when this launches.
+                </p>
+                <WaitlistForm />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -1,22 +1,12 @@
 import { Star } from "lucide-react";
 
-// [TESTIMONIAL PLACEHOLDERS] — Replace with real client quotes before launch
-const TESTIMONIALS = [
-  {
-    quote:
-      "Working with Poole Media has been a game-changer for our business. They are truly masters at their craft, and their work has helped us reach new heights. We couldn't be happier with the results!",
-    name: "Austin Kautzman",
-    role: "Owner/Operator",
-    company: "Humble Home Solutions LLC",
-  },
-  {
-    quote:
-      "The team at Poole Media is exceptional. Their expertise and dedication to our project were evident from the start. They delivered beyond our expectations, and we are thrilled with the outcome.",
-    name: "Dr. Craig Christian",
-    role: "Founder & Practicing Dentist",
-    company: "Riverstone Dental",
-  }
-];
+const TESTIMONIAL = {
+  quote:
+    "Working with Poole Media has been a game-changer for our business. They are truly masters at their craft, and their work has helped us reach new heights. We couldn't be happier with the results!",
+  name: "Austin Kautzman",
+  role: "Owner/Operator",
+  company: "Humble Home Solutions LLC",
+};
 
 function StarRating() {
   return (
@@ -31,9 +21,9 @@ function StarRating() {
 export function Testimonials() {
   return (
     <section className="py-24 md:py-32 bg-[#0a0a0a]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className="text-center mb-12">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
             Client Stories
           </p>
@@ -43,33 +33,26 @@ export function Testimonials() {
           </h2>
         </div>
 
-        {/* Testimonial cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {TESTIMONIALS.map((t, i) => (
-            <figure
-              key={i}
-              className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/[0.08] p-7"
-            >
-              <StarRating />
-              <blockquote className="mt-4 flex-1">
-                <p className="text-sm text-white/60 leading-relaxed italic">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-              </blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <div className="h-9 w-9 rounded-full bg-gradient-brand flex items-center justify-center text-xs font-bold text-white shrink-0">
-                  {t.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{t.name}</p>
-                  <p className="text-xs text-white/40">
-                    {t.role} · {t.company}
-                  </p>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        {/* Single centered testimonial */}
+        <figure className="flex flex-col rounded-2xl bg-white/[0.03] border border-white/[0.08] p-8 md:p-10">
+          <StarRating />
+          <blockquote className="mt-5 flex-1">
+            <p className="text-base md:text-lg text-white/60 leading-relaxed italic">
+              &ldquo;{TESTIMONIAL.quote}&rdquo;
+            </p>
+          </blockquote>
+          <figcaption className="mt-8 flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-brand flex items-center justify-center text-sm font-bold text-white shrink-0">
+              {TESTIMONIAL.name.charAt(0)}
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">{TESTIMONIAL.name}</p>
+              <p className="text-xs text-white/40">
+                {TESTIMONIAL.role} · {TESTIMONIAL.company}
+              </p>
+            </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );

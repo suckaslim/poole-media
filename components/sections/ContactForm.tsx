@@ -9,10 +9,11 @@ import {
 } from "@/app/actions/contact";
 
 const SERVICE_OPTIONS = [
-  "Website Development",
-  "AI-Ready SEO",
-  "Email Marketing",
-  "Full Package (All Services)",
+  "Website Design and Build",
+  "Agentic SEO",
+  "AI-Assisted Content",
+  "Site Maintenance",
+  "Full Package",
   "Other / Not Sure",
 ];
 

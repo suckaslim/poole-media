@@ -1,27 +1,34 @@
-import { Globe, Search, Mail } from "lucide-react";
+import { Globe, Search, Bot, Shield } from "lucide-react";
 import { ServiceCard } from "@/components/shared/ServiceCard";
 
 const SERVICES = [
   {
     icon: <Globe className="h-6 w-6" />,
-    title: "Website Development",
+    title: "Website Design and Build",
     description:
-      "Fast, modern, mobile-first sites that load in under 2 seconds and turn visitors into paying customers. No bloated templates — clean design focused on results.",
-    href: "/services#web-development",
+      "Custom Next.js sites, mobile-first, sub-2-second load times, structured for AI search from day one. No templates — clean code built to convert.",
+    href: "/services#website",
   },
   {
     icon: <Search className="h-6 w-6" />,
-    title: "AI-Ready SEO",
+    title: "Agentic SEO",
     description:
-      "Optimize for the new AI search world (ChatGPT, Perplexity, Grok) while crushing traditional Google rankings. Perfect for local businesses trying to stand out.",
-    href: "/services#ai-seo",
+      "Continuous technical SEO run by AI agents, reviewed by a human before anything ships. Rank on Google AND show up when customers ask ChatGPT or Perplexity.",
+    href: "/services#agentic-seo",
   },
   {
-    icon: <Mail className="h-6 w-6" />,
-    title: "Email Marketing",
+    icon: <Bot className="h-6 w-6" />,
+    title: "AI-Assisted Content",
     description:
-      "Automated email sequences that nurture leads, win back old customers, and drive consistent bookings or sales on autopilot.",
-    href: "/services#email-marketing",
+      "2–4 SEO-optimized blog posts or landing pages per month. AI-drafted, human-reviewed, client-approved. Compounds with Agentic SEO for faster rankings.",
+    href: "/services#ai-content",
+  },
+  {
+    icon: <Shield className="h-6 w-6" />,
+    title: "Site Maintenance",
+    description:
+      "Hosting management, dependency updates, uptime monitoring, and minor copy edits. Your site stays fast, secure, and current — without you thinking about it.",
+    href: "/services#site-maintenance",
   },
 ];
 
@@ -45,7 +52,7 @@ export function Services() {
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} {...service} />
           ))}
