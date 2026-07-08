@@ -6,10 +6,13 @@ export const metadata: Metadata = {
   title: "About — AI-Driven Marketing Agency",
   description:
     "Poole Media is a digital marketing agency in Tri-Cities, WA. We help small and mid-sized businesses compete and win in the era of AI-powered search.",
+  alternates: {
+    canonical: "/about",
+  },
   openGraph: {
     title: "About Poole Media — AI-Driven Marketing Agency",
     description:
-      "Based in Tri-Cities, WA. We build fast websites, optimize for AI search, and automate email marketing so local businesses can compete with anyone.",
+      "Based in Tri-Cities, WA. We build fast, AI-ready websites and run continuous agentic SEO so local businesses can compete with anyone.",
     type: "website",
     url: "https://poole.media/about",
   },

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Case Studies — Real Client Results",
   description:
     "See how Poole Media has helped local businesses across Washington grow their online presence with AI-ready websites and agentic SEO.",
+  alternates: {
+    canonical: "/case-studies",
+  },
   openGraph: {
     title: "Case Studies — Real Client Results | Poole Media",
     description:

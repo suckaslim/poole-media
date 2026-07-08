@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "FAQ — Frequently Asked Questions",
   description:
     "Answers to common questions about Poole Media's services, packages, contracts, and how to get started with AI-driven digital marketing.",
+  alternates: {
+    canonical: "/faq",
+  },
   openGraph: {
     title: "FAQ — Frequently Asked Questions | Poole Media",
     description:

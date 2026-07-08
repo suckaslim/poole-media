@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
   description:
     "We build custom websites and run continuous agentic SEO — so your business shows up on Google, ChatGPT, Perplexity, and Grok. Serving Tri-Cities, WA and beyond.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
     description:

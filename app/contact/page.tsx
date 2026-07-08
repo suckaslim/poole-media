@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Contact — Free Marketing Audit",
   description:
     "Book a free 30-minute digital marketing audit. We'll review your online presence and give you a clear action plan — no commitment required.",
+  alternates: {
+    canonical: "/contact",
+  },
   openGraph: {
     title: "Contact Poole Media — Book Your Free Audit",
     description:
@@ -93,6 +96,10 @@ export default function ContactPage() {
               <p className="text-white/55 leading-relaxed mb-10">
                 Fill out the form and we&apos;ll get back to you within one
                 business day. Or if you prefer, reach us directly by email.
+                Tell us a little about your business and what you&apos;re
+                hoping to improve — a slow website, rankings that have
+                stalled, or just not knowing where to start — and we&apos;ll
+                come to the call ready to talk specifics instead of generalities.
               </p>
 
               <div className="space-y-6">
@@ -189,6 +196,33 @@ export default function ContactPage() {
             multi-location operations. No project is too early-stage to start
             with a conversation, and no question is too small to ask before
             you commit to anything.
+          </p>
+        </div>
+      </section>
+
+      {/* Service area */}
+      <section className="py-16 md:py-20 bg-[#0a0a0a] border-t border-white/[0.04]">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-white mb-4">
+            Serving Tri-Cities and beyond
+          </h2>
+          <p className="text-white/55 leading-relaxed mb-4">
+            Poole Media is based in Kennewick, WA and works with businesses
+            throughout the Tri-Cities — Kennewick, Richland, and Pasco — as
+            well as clients across Washington and around the country.
+            Wherever you&apos;re located, the process is the same: a phone or
+            video call, a look at what&apos;s currently working (or not) on
+            your site and in your search results, and a clear next step
+            afterward.
+          </p>
+          <p className="text-white/55 leading-relaxed">
+            Most people reach out after noticing one of a few things: their
+            site loads slowly or looks dated on mobile, they&apos;ve stopped
+            showing up on Google the way they used to, or they&apos;ve never
+            shown up when someone asks ChatGPT or Perplexity for a
+            recommendation in their industry. Any one of those is a good
+            enough reason to book a call — you don&apos;t need a fully
+            scoped project in mind before reaching out.
           </p>
         </div>
       </section>

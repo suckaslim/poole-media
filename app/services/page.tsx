@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Website Development, SEO & AI Content",
   description:
     "Custom Next.js websites, continuous agentic SEO, AI-assisted content, and site maintenance. No contracts. Built for the AI search era.",
+  alternates: {
+    canonical: "/services",
+  },
   openGraph: {
     title: "Services — Website Development, Agentic SEO and AI Content | Poole Media",
     description:
