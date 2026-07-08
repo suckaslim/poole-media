@@ -3,11 +3,11 @@ import { JsonLd } from "@/components/shared/JsonLd";
 import { Hero } from "@/components/sections/Hero";
 
 export const metadata: Metadata = {
-  title: "Poole Media — Agentic SEO and Website Development | Tri-Cities, WA",
+  title: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
   description:
     "We build custom websites and run continuous agentic SEO — so your business shows up on Google, ChatGPT, Perplexity, and Grok. Serving Tri-Cities, WA and beyond.",
   openGraph: {
-    title: "Poole Media — Agentic SEO and Website Development | Tri-Cities, WA",
+    title: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
     description:
       "Custom websites and continuous agentic SEO. Get found on Google, ChatGPT, Perplexity, and Grok.",
     type: "website",

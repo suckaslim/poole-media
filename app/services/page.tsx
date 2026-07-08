@@ -4,7 +4,7 @@ import { Globe, Search, Bot, Shield, Check, ArrowRight } from "lucide-react";
 import { WaitlistForm } from "@/components/sections/WaitlistForm";
 
 export const metadata: Metadata = {
-  title: "Services — Website Development, Agentic SEO and AI Content",
+  title: "Website Development, SEO & AI Content",
   description:
     "Custom Next.js websites, continuous agentic SEO, AI-assisted content, and site maintenance. No contracts. Built for the AI search era.",
   openGraph: {

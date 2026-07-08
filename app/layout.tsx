@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://poole.media"
   ),
   title: {
-    default: "Poole Media — Agentic SEO and Website Development | Tri-Cities, WA",
+    default: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
     template: "%s | Poole Media",
   },
   description:

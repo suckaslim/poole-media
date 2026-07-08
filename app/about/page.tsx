@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MapPin, ArrowRight, Zap, Shield, BarChart3 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About — AI-Driven Marketing Agency in Tri-Cities, WA",
+  title: "About — AI-Driven Marketing Agency",
   description:
     "Poole Media is a digital marketing agency in Tri-Cities, WA. We help small and mid-sized businesses compete and win in the era of AI-powered search.",
   openGraph: {
@@ -185,6 +185,38 @@ export default function AboutPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Work With */}
+      <section className="py-20 md:py-28 bg-[#060610] border-t border-white/[0.05]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
+              Who We Work With
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-white mb-6">
+              Built for local, built to scale
+            </h2>
+            <p className="text-white/55 leading-relaxed mb-6">
+              Poole Media works best with local and regional businesses that
+              are ready to invest in a real digital presence — home service
+              companies, dental and medical practices, contractors, and other
+              client-facing businesses across Washington and beyond. Whether
+              you&apos;re launching your first real website or replacing one
+              that hasn&apos;t been touched in years, every engagement starts
+              the same way: a free audit of what&apos;s working, what
+              isn&apos;t, and where the fastest wins are.
+            </p>
+            <p className="text-white/55 leading-relaxed">
+              Every project runs through the same four core services —
+              Website Design and Build, Agentic SEO, AI-Assisted Content, and
+              Site Maintenance — so your site, your search rankings, and your
+              content stay in sync instead of living in separate tools with
+              separate vendors. And because there are no contracts, that
+              alignment has to keep earning its place every month.
+            </p>
           </div>
         </div>
       </section>

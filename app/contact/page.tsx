@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Mail, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { JsonLd } from "@/components/shared/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact — Book Your Free Digital Marketing Audit",
+  title: "Contact — Free Marketing Audit",
   description:
     "Book a free 30-minute digital marketing audit. We'll review your online presence and give you a clear action plan — no commitment required.",
   openGraph: {
@@ -152,6 +153,43 @@ export default function ContactPage() {
               <ContactForm />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Not ready to book */}
+      <section className="py-16 md:py-20 bg-[#060610] border-t border-white/[0.05]">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-white mb-4">
+            Not ready to book a call?
+          </h2>
+          <p className="text-white/55 leading-relaxed mb-4">
+            Take a look at our{" "}
+            <Link
+              href="/case-studies"
+              className="text-[#8b5cf6] hover:text-white transition-colors duration-200"
+            >
+              case studies
+            </Link>{" "}
+            to see the kind of work we do, or check the{" "}
+            <Link
+              href="/faq"
+              className="text-[#8b5cf6] hover:text-white transition-colors duration-200"
+            >
+              FAQ
+            </Link>{" "}
+            for quick answers about pricing, contracts, and how engagements
+            typically start. If you already know which service you need — a
+            new website, ongoing SEO, content, or site maintenance — mention
+            it in the service field above and we&apos;ll come prepared with
+            relevant examples and next steps for that specific service.
+          </p>
+          <p className="text-white/55 leading-relaxed">
+            We work with local and regional businesses across the Tri-Cities
+            and beyond, from single-location service businesses to growing
+            multi-location operations. No project is too early-stage to start
+            with a conversation, and no question is too small to ask before
+            you commit to anything.
+          </p>
         </div>
       </section>
     </main>

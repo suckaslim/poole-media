@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { createReadClient } from "@/lib/supabase";
 
 export const metadata: Metadata = {
-  title: "Case Studies — Real Results for Real Businesses",
+  title: "Case Studies — Real Client Results",
   description:
-    "See how Poole Media has helped local businesses across Washington grow their online presence with AI-powered websites, SEO, and email marketing.",
+    "See how Poole Media has helped local businesses across Washington grow their online presence with AI-ready websites and agentic SEO.",
   openGraph: {
-    title: "Case Studies — Real Results for Real Businesses",
+    title: "Case Studies — Real Client Results | Poole Media",
     description:
       "Real results from real businesses. Explore our work building fast, AI-ready websites for local companies.",
     type: "website",
