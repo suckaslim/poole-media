@@ -3,24 +3,29 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { createReadClient } from "@/lib/supabase";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import {
+  caseStudyBySlugQuery,
+  caseStudySlugsQuery,
+  type CaseStudy,
+} from "@/sanity/lib/queries";
 import { CaseStudyDetailImage } from "@/components/shared/CaseStudyDetailImage";
 import { JsonLd } from "@/components/shared/JsonLd";
 
+// TODO(sanity-migration): this used to query Supabase's case_studies
+// table (see lib/supabase.ts) — table/bucket still exist but are unused.
 const getCaseStudy = cache(async (slug: string) => {
-  const supabase = createReadClient();
-  const { data } = await supabase
-    .from("case_studies")
-    .select("*")
-    .eq("slug", slug)
-    .single();
-  return data;
+  return client
+    .fetch<CaseStudy | null>(caseStudyBySlugQuery, { slug })
+    .catch(() => null);
 });
 
 export async function generateStaticParams() {
-  const supabase = createReadClient();
-  const { data } = await supabase.from("case_studies").select("slug");
-  return (data ?? []).map(({ slug }) => ({ slug }));
+  const slugs = await client
+    .fetch<Array<{ slug: string }>>(caseStudySlugsQuery)
+    .catch(() => []);
+  return slugs.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -33,26 +38,26 @@ export async function generateMetadata({
 
   if (!data) return { title: "Case Study Not Found" };
 
-  const imageUrl = data.image_ext
-    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${data.slug}.${data.image_ext}`
+  const imageUrl = data.image
+    ? urlFor(data.image).width(1200).height(630).url()
     : null;
 
   return {
-    title: `${data.client_name} — Case Study`,
+    title: `${data.clientName} — Case Study`,
     description: data.tagline,
     alternates: {
       canonical: `/case-studies/${data.slug}`,
     },
     openGraph: {
-      title: `${data.client_name} — Case Study | Poole Media`,
+      title: `${data.clientName} — Case Study | Poole Media`,
       description: data.tagline,
-      images: [{ url: imageUrl ? imageUrl : "", width: 1200, height: 630, alt: data.client_name }],
+      images: [{ url: imageUrl ? imageUrl : "", width: 1200, height: 630, alt: data.clientName }],
       type: "article",
       url: `https://poole.media/case-studies/${data.slug}`,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${data.client_name} — Case Study`,
+      title: `${data.clientName} — Case Study`,
       description: data.tagline,
       images: [imageUrl ? imageUrl : ""],
     },
@@ -69,9 +74,7 @@ export default async function CaseStudyPage({
 
   if (!cs) notFound();
 
-  const imageUrl = cs.image_ext
-    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${cs.slug}.${cs.image_ext}`
-    : null;
+  const imageUrl = cs.image ? urlFor(cs.image).width(1600).url() : null;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -92,7 +95,7 @@ export default async function CaseStudyPage({
       {
         "@type": "ListItem",
         position: 3,
-        name: cs.client_name,
+        name: cs.clientName,
         item: `https://poole.media/case-studies/${cs.slug}`,
       },
     ],
@@ -123,7 +126,7 @@ export default async function CaseStudyPage({
             Case Study
           </p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-white mb-4">
-            {cs.client_name}
+            {cs.clientName}
           </h1>
           <p className="text-xl text-white/55 max-w-2xl">{cs.tagline}</p>
         </div>
@@ -135,7 +138,7 @@ export default async function CaseStudyPage({
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
             {/* Main content */}
             <div className="lg:col-span-2 space-y-10">
-              <CaseStudyDetailImage src={imageUrl} alt={cs.client_name} />
+              <CaseStudyDetailImage src={imageUrl} alt={cs.clientName} />
 
               <div>
                 <h2 className="font-display text-2xl font-semibold text-white mb-4">
@@ -166,7 +169,7 @@ export default async function CaseStudyPage({
                   <div>
                     <dt className="text-xs text-white/40 mb-1">Client</dt>
                     <dd className="text-sm font-medium text-white">
-                      {cs.client_name}
+                      {cs.clientName}
                     </dd>
                   </div>
                   <div>

@@ -20,6 +20,15 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
+  // Close mobile menu on route change — adjusted during render (React's
+  // recommended pattern) rather than in an effect, to avoid an extra
+  // render/commit cycle from calling setState synchronously in useEffect.
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+    setMobileOpen(false);
+  }
+
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 20);
   }, []);
@@ -28,11 +37,6 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   // Close on Escape key
   useEffect(() => {

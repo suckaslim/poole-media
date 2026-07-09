@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { Hero } from "@/components/sections/Hero";
+import { client } from "@/sanity/lib/client";
+import { homepageQuery, type HomepageData } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Poole Media | Agentic SEO & Web Design, Tri-Cities WA",
@@ -63,14 +65,52 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { FaqPreview } from "@/components/sections/FaqPreview";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await client
+    .fetch<HomepageData | null>(homepageQuery)
+    .catch(() => null);
+
+  const heroHeadlineLine1 = data?.heroHeadlineLine1 ?? "Get Found in AI Search.";
+  const heroHeadlineLine2 = data?.heroHeadlineLine2 ?? "Get More Customers.";
+  const heroSubheadline =
+    data?.heroSubheadline ??
+    "We build sub-2-second websites and run continuous agentic SEO — so your business gets found on Google, ChatGPT, Perplexity, and Grok.";
+  const heroCtaPrimary = data?.heroCtaPrimary ?? "Get Free Audit";
+  const heroCtaSecondary = data?.heroCtaSecondary ?? "See Our Work";
+  const statsItems = data?.statsItems?.length
+    ? data.statsItems
+    : [
+        { value: "< 2s", label: "Page Load Times" },
+        { value: "AI-Ready", label: "ChatGPT · Perplexity · Grok · Google" },
+        { value: "No Contracts", label: "Cancel Anytime" },
+        { value: "Mobile-First", label: "Every Build, By Default" },
+        { value: "Tri-Cities, WA", label: "Serving Businesses Nationwide" },
+      ];
+  const whatWeDoHeadlinePlain =
+    data?.whatWeDoHeadlinePlain ?? "Everything you need to";
+  const whatWeDoHeadlineHighlight =
+    data?.whatWeDoHeadlineHighlight ?? "dominate online";
+  const whatWeDoSubheadline =
+    data?.whatWeDoSubheadline ??
+    "From your first website to ongoing AI search dominance — we handle the digital presence so you can focus on running your business.";
+
   return (
     <main>
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={webSiteSchema} />
-      <Hero />
-      <SocialProof />
-      <Services />
+      <Hero
+        headlineLine1={heroHeadlineLine1}
+        headlineLine2={heroHeadlineLine2}
+        subheadline={heroSubheadline}
+        ctaPrimary={heroCtaPrimary}
+        ctaSecondary={heroCtaSecondary}
+      />
+      <SocialProof items={statsItems} />
+      <Services
+        headlinePlain={whatWeDoHeadlinePlain}
+        headlineHighlight={whatWeDoHeadlineHighlight}
+        subheadline={whatWeDoSubheadline}
+      />
       <WhyPooleMedia />
       <HowItWorks />
       <CaseStudiesPreview />

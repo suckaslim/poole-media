@@ -32,7 +32,15 @@ const SERVICES = [
   },
 ];
 
-export function Services() {
+export function Services({
+  headlinePlain,
+  headlineHighlight,
+  subheadline,
+}: {
+  headlinePlain: string;
+  headlineHighlight: string;
+  subheadline: string;
+}) {
   return (
     <section className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -42,12 +50,10 @@ export function Services() {
             What We Do
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-white mb-5">
-            Everything you need to{" "}
-            <span className="text-gradient">dominate online</span>
+            {headlinePlain} <span className="text-gradient">{headlineHighlight}</span>
           </h2>
           <p className="text-lg text-white/50 leading-relaxed">
-            From your first website to ongoing AI search dominance — we handle
-            the digital presence so you can focus on running your business.
+            {subheadline}
           </p>
         </div>
 

@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Globe, Search, Bot, Shield, Check, ArrowRight } from "lucide-react";
+import {
+  Globe,
+  Search,
+  Bot,
+  Shield,
+  Check,
+  ArrowRight,
+  type LucideIcon,
+} from "lucide-react";
 import { WaitlistForm } from "@/components/sections/WaitlistForm";
+import { client } from "@/sanity/lib/client";
+import {
+  servicesPageQuery,
+  comingSoonServiceQuery,
+  type ServicesPageData,
+  type ServicesPageService,
+  type ComingSoonServiceData,
+} from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Website Development, SEO & AI Content",
@@ -19,10 +35,16 @@ export const metadata: Metadata = {
   },
 };
 
-const SERVICES = [
+const ICONS: Record<ServicesPageService["id"], LucideIcon> = {
+  website: Globe,
+  "agentic-seo": Search,
+  "ai-content": Bot,
+  "site-maintenance": Shield,
+};
+
+const FALLBACK_SERVICES: ServicesPageService[] = [
   {
     id: "website",
-    icon: Globe,
     name: "Website Design and Build",
     price: "$1,500–$4,000",
     priceLabel: "One-time project fee",
@@ -43,7 +65,6 @@ const SERVICES = [
   },
   {
     id: "agentic-seo",
-    icon: Search,
     name: "Agentic SEO",
     price: "$500–$1,500/mo",
     priceLabel: "Monthly retainer",
@@ -65,7 +86,6 @@ const SERVICES = [
   },
   {
     id: "ai-content",
-    icon: Bot,
     name: "AI-Assisted Content",
     price: "$300–$800/mo",
     priceLabel: "Monthly retainer",
@@ -85,7 +105,6 @@ const SERVICES = [
   },
   {
     id: "site-maintenance",
-    icon: Shield,
     name: "Site Maintenance",
     price: "$100–$200/mo",
     priceLabel: "Monthly",
@@ -103,7 +122,39 @@ const SERVICES = [
   },
 ];
 
-export default function ServicesPage() {
+const FALLBACK_COMING_SOON: ComingSoonServiceData = {
+  sectionEyebrow: "Coming Soon",
+  sectionHeadline: "What's next",
+  sectionSubheadline:
+    "More AI-powered tools for local businesses — in development now.",
+  serviceName: "AI Review Management",
+  descriptionParagraphs: [
+    "Automatically respond to Google, Yelp, and Facebook reviews with context-aware replies that don't sound automated. Negative reviews trigger an alert to the business owner before anything posts.",
+    "Includes a monthly competitor review intelligence report — the top pain points customers leave for your competitors, turned into a marketing brief.",
+  ],
+  waitlistPrompt: "Join the waitlist — be first to know when this launches.",
+};
+
+export default async function ServicesPage() {
+  const [servicesData, comingSoonData] = await Promise.all([
+    client.fetch<ServicesPageData | null>(servicesPageQuery).catch(() => null),
+    client
+      .fetch<ComingSoonServiceData | null>(comingSoonServiceQuery)
+      .catch(() => null),
+  ]);
+
+  const pageHeadlinePlain =
+    servicesData?.pageHeadlinePlain ?? "Everything you need to";
+  const pageHeadlineHighlight =
+    servicesData?.pageHeadlineHighlight ?? "grow online";
+  const pageSubheadline =
+    servicesData?.pageSubheadline ??
+    "Four core services, all AI-first, all engineered to make your business impossible to ignore — on Google and in AI search.";
+  const services = servicesData?.services?.length
+    ? servicesData.services
+    : FALLBACK_SERVICES;
+  const comingSoon = comingSoonData ?? FALLBACK_COMING_SOON;
+
   return (
     <main>
       {/* Hero */}
@@ -114,12 +165,11 @@ export default function ServicesPage() {
             Services
           </p>
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white mb-6">
-            Everything you need to{" "}
-            <span className="text-gradient">grow online</span>
+            {pageHeadlinePlain}{" "}
+            <span className="text-gradient">{pageHeadlineHighlight}</span>
           </h1>
           <p className="text-xl text-white/55 leading-relaxed max-w-2xl mx-auto mb-10">
-            Four core services, all AI-first, all engineered to make your
-            business impossible to ignore — on Google and in AI search.
+            {pageSubheadline}
           </p>
           <Link
             href="/contact"
@@ -134,8 +184,8 @@ export default function ServicesPage() {
       {/* Services detail */}
       <section className="py-20 md:py-28 bg-[#0a0a0a]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-24">
-          {SERVICES.map((service, index) => {
-            const Icon = service.icon;
+          {services.map((service, index) => {
+            const Icon = ICONS[service.id];
             const flip = index % 2 === 1;
             return (
               <div
@@ -207,13 +257,13 @@ export default function ServicesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <span className="inline-flex items-center rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/40 mb-5">
-              Coming Soon
+              {comingSoon.sectionEyebrow}
             </span>
             <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white/50 mb-3">
-              What&apos;s next
+              {comingSoon.sectionHeadline}
             </h2>
             <p className="text-white/30 leading-relaxed max-w-xl">
-              More AI-powered tools for local businesses — in development now.
+              {comingSoon.sectionSubheadline}
             </p>
           </div>
 
@@ -222,25 +272,22 @@ export default function ServicesPage() {
               {/* Service description */}
               <div>
                 <h3 className="font-display text-2xl font-semibold text-white/50 mb-3">
-                  AI Review Management
+                  {comingSoon.serviceName}
                 </h3>
-                <p className="text-white/30 leading-relaxed mb-4">
-                  Automatically respond to Google, Yelp, and Facebook reviews
-                  with context-aware replies that don&apos;t sound automated.
-                  Negative reviews trigger an alert to the business owner before
-                  anything posts.
-                </p>
-                <p className="text-white/30 leading-relaxed">
-                  Includes a monthly competitor review intelligence report — the
-                  top pain points customers leave for your competitors, turned
-                  into a marketing brief.
-                </p>
+                {comingSoon.descriptionParagraphs.map((paragraph, i) => (
+                  <p
+                    key={i}
+                    className={`text-white/30 leading-relaxed ${i < comingSoon.descriptionParagraphs.length - 1 ? "mb-4" : ""}`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
               </div>
 
               {/* Waitlist */}
               <div>
                 <p className="text-sm font-medium text-white/40 mb-4">
-                  Join the waitlist — be first to know when this launches.
+                  {comingSoon.waitlistPrompt}
                 </p>
                 <WaitlistForm />
               </div>

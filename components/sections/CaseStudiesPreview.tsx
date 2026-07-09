@@ -1,17 +1,20 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { createReadClient } from "@/lib/supabase";
+import { client } from "@/sanity/lib/client";
+import {
+  featuredCaseStudiesQuery,
+  type CaseStudy,
+} from "@/sanity/lib/queries";
 import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
 
 export async function CaseStudiesPreview() {
-  const supabase = createReadClient();
-  const { data: caseStudies, error } = await supabase
-    .from("case_studies")
-    .select("*")
-    .eq("featured", true)
-    .order("created_at");
+  // TODO(sanity-migration): this used to query Supabase's case_studies
+  // table (see lib/supabase.ts) — table/bucket still exist but are unused.
+  const caseStudies = await client
+    .fetch<CaseStudy[]>(featuredCaseStudiesQuery)
+    .catch(() => []);
 
-  if (error || !caseStudies?.length) return null;
+  if (!caseStudies.length) return null;
 
   return (
     <section className="py-24 md:py-32 bg-[#060610]">
@@ -39,7 +42,7 @@ export async function CaseStudiesPreview() {
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {caseStudies.map((cs) => (
-            <CaseStudyCard key={cs.id} caseStudy={cs} />
+            <CaseStudyCard key={cs._id} caseStudy={cs} />
           ))}
         </div>
       </div>

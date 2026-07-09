@@ -38,9 +38,13 @@ const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/poole.media/", Icon: InstagramIcon },
 ];
 
-export function Footer() {
-  const year = new Date().getFullYear();
-
+export function Footer({
+  description,
+  copyright,
+}: {
+  description: string;
+  copyright: string;
+}) {
   return (
     <footer className="bg-[#060610] border-t border-white/[0.06]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -59,7 +63,7 @@ export function Footer() {
               />
             </Link>
             <p className="mt-4 text-sm text-white/45 leading-relaxed max-w-[22ch]">
-              AI-driven digital marketing for businesses that want to be found.
+              {description}
             </p>
             <div className="mt-5 flex items-center gap-2 text-xs text-white/35">
               <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -132,7 +136,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/[0.06] py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/30 order-2 sm:order-1">
-            © {year} Poole Media. All rights reserved.
+            {copyright}
           </p>
           <p className="text-xs text-white/30 order-1 sm:order-2">
             Tri-Cities, WA · Serving businesses nationwide

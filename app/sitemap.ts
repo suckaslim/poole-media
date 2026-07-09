@@ -1,22 +1,22 @@
 import type { MetadataRoute } from "next";
-import { createReadClient } from "@/lib/supabase";
+import { client } from "@/sanity/lib/client";
+import { caseStudiesQuery, type CaseStudy } from "@/sanity/lib/queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://poole.media";
 
-  const supabase = createReadClient();
-  const { data: caseStudies } = await supabase
-    .from("case_studies")
-    .select("slug, created_at");
+  // TODO(sanity-migration): this used to query Supabase's case_studies
+  // table (see lib/supabase.ts) — table/bucket still exist but are unused.
+  const caseStudies = await client
+    .fetch<CaseStudy[]>(caseStudiesQuery)
+    .catch(() => []);
 
-  const caseStudyEntries: MetadataRoute.Sitemap = (caseStudies ?? []).map(
-    (cs) => ({
-      url: `${baseUrl}/case-studies/${cs.slug}`,
-      lastModified: new Date(cs.created_at),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    })
-  );
+  const caseStudyEntries: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
+    url: `${baseUrl}/case-studies/${cs.slug}`,
+    lastModified: new Date(cs._createdAt),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
 
   return [
     {

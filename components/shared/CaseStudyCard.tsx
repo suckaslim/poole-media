@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { CaseStudy } from "@/types/supabase";
+import type { CaseStudy } from "@/sanity/lib/queries";
+import { urlFor } from "@/sanity/lib/image";
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;
@@ -11,8 +12,8 @@ interface CaseStudyCardProps {
 
 export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   const [imageError, setImageError] = useState(false);
-  const imageUrl = caseStudy.image_ext
-    ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/case_study_images/${caseStudy.slug}.${caseStudy.image_ext}`
+  const imageUrl = caseStudy.image
+    ? urlFor(caseStudy.image).width(800).height(450).url()
     : null;
 
   return (
@@ -23,10 +24,10 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       {/* Image / Gradient placeholder */}
       <div className="relative aspect-video overflow-hidden bg-gradient-to-br from-[#6366f1]/20 via-[#080818] to-[#8b5cf6]/20">
         {imageUrl && !imageError && (
-          // eslint-disable-next-line @next/next-eslint/no-img-element
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={imageUrl}
-            alt={caseStudy.client_name}
+            alt={caseStudy.clientName}
             onError={() => setImageError(true)}
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
@@ -41,7 +42,7 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
           Case Study
         </p>
         <h3 className="text-lg font-semibold text-white mb-2 tracking-tight group-hover:text-gradient transition-all duration-300">
-          {caseStudy.client_name}
+          {caseStudy.clientName}
         </h3>
         <p className="text-sm text-white/50 mb-4 line-clamp-2">{caseStudy.tagline}</p>
 

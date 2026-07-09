@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { createReadClient } from "@/lib/supabase";
+import { client } from "@/sanity/lib/client";
+import { caseStudiesQuery, type CaseStudy } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title: "Case Studies — Real Client Results",
@@ -19,11 +20,11 @@ export const metadata: Metadata = {
 import { CaseStudyCard } from "@/components/shared/CaseStudyCard";
 
 export default async function CaseStudiesPage() {
-  const supabase = createReadClient();
-  const { data: caseStudies } = await supabase
-    .from("case_studies")
-    .select("*")
-    .order("created_at", { ascending: false });
+  // TODO(sanity-migration): this used to query Supabase's case_studies
+  // table (see lib/supabase.ts) — table/bucket still exist but are unused.
+  const caseStudies = await client
+    .fetch<CaseStudy[]>(caseStudiesQuery)
+    .catch(() => []);
 
   return (
     <main>
@@ -50,7 +51,7 @@ export default async function CaseStudiesPage() {
           {caseStudies && caseStudies.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {caseStudies.map((cs) => (
-                <CaseStudyCard key={cs.id} caseStudy={cs} />
+                <CaseStudyCard key={cs._id} caseStudy={cs} />
               ))}
             </div>
           ) : (

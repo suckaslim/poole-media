@@ -78,7 +78,19 @@ const ParticlesCanvas: FC = () => {
   );
 };
 
-export function Hero() {
+export function Hero({
+  headlineLine1,
+  headlineLine2,
+  subheadline,
+  ctaPrimary,
+  ctaSecondary,
+}: {
+  headlineLine1: string;
+  headlineLine2: string;
+  subheadline: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+}) {
   const heroRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
 
@@ -121,10 +133,10 @@ export function Hero() {
           className="font-display font-semibold tracking-tight leading-[1.05]"
         >
           <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white">
-            Get Found in AI Search.
+            {headlineLine1}
           </span>
           <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gradient mt-1">
-            Get More Customers.
+            {headlineLine2}
           </span>
         </motion.h1>
 
@@ -133,8 +145,7 @@ export function Hero() {
           variants={fadeUp}
           className="mt-8 mx-auto max-w-2xl text-lg md:text-xl text-white/55 leading-relaxed"
         >
-          We build sub-2-second websites and run continuous agentic SEO — so
-          your business gets found on Google, ChatGPT, Perplexity, and Grok.
+          {subheadline}
         </motion.p>
 
         {/* CTAs */}
@@ -146,14 +157,14 @@ export function Hero() {
             href="/contact"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            Get Free Audit
+            {ctaPrimary}
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
             href="/case-studies"
             className="inline-flex items-center gap-2 rounded-lg border border-white/[0.15] bg-white/[0.04] px-7 py-3.5 text-base font-semibold text-white/80 hover:text-white hover:border-white/30 hover:bg-white/[0.07] transition-all duration-200"
           >
-            See Our Work
+            {ctaSecondary}
           </Link>
         </motion.div>
 

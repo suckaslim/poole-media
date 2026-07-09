@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { client } from "@/sanity/lib/client";
+import { navigationQuery, type NavigationData } from "@/sanity/lib/queries";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -80,11 +82,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const navigation = await client
+    .fetch<NavigationData | null>(navigationQuery)
+    .catch(() => null);
+
+  const footerDescription =
+    navigation?.footerDescription ??
+    "AI-driven digital marketing for businesses that want to be found.";
+  const footerCopyright = (
+    navigation?.footerCopyright ?? "© {year} Poole Media. All rights reserved."
+  ).replace("{year}", String(new Date().getFullYear()));
+
   return (
     <html
       lang="en"
@@ -94,7 +107,10 @@ export default function RootLayout({
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-1">{children}</div>
-        <Footer />
+        <Footer
+          description={footerDescription}
+          copyright={footerCopyright}
+        />
       </body>
     </html>
   );
