@@ -51,6 +51,7 @@ export async function submitWaitlistForm(
       resend.emails.send({
         from: "Poole Media <contact@poole.media>",
         to: process.env.RESEND_TO_EMAIL!,
+        replyTo: data.email,
         subject: `Waitlist signup: ${data.service_interest} — ${data.name}`,
         html: `
           <div style="font-family:sans-serif;max-width:600px;color:#1a1a1a;">
@@ -63,7 +64,7 @@ export async function submitWaitlistForm(
               </tr>
               <tr>
                 <td style="padding:8px 12px 8px 0;font-weight:600;color:#555;white-space:nowrap;">Email</td>
-                <td style="padding:8px 0;"><a href="mailto:${escapeHtml(data.email)}" style="color:#6366f1;">${escapeHtml(data.email)}</a></td>
+                <td style="padding:8px 0;">${escapeHtml(data.email)}</td>
               </tr>
             </table>
           </div>
