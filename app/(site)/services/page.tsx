@@ -289,7 +289,7 @@ export default async function ServicesPage() {
                 <p className="text-sm font-medium text-white/40 mb-4">
                   {comingSoon.waitlistPrompt}
                 </p>
-                <WaitlistForm />
+                <WaitlistForm serviceName={comingSoon.serviceName} />
               </div>
             </div>
           </div>

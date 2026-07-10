@@ -4,7 +4,7 @@ import { useState } from "react";
 import { submitWaitlistForm } from "@/app/actions/waitlist";
 import { ArrowRight } from "lucide-react";
 
-export function WaitlistForm() {
+export function WaitlistForm({ serviceName }: { serviceName: string }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -14,7 +14,11 @@ export function WaitlistForm() {
     e.preventDefault();
     setStatus("loading");
     setErrorMsg("");
-    const result = await submitWaitlistForm({ name, email });
+    const result = await submitWaitlistForm({
+      name,
+      email,
+      service_interest: serviceName,
+    });
     if (result.success) {
       setStatus("success");
     } else {
@@ -28,7 +32,7 @@ export function WaitlistForm() {
       <div className="rounded-xl border border-[#6366f1]/30 bg-[#6366f1]/5 px-5 py-4">
         <p className="text-sm font-medium text-white">You&apos;re on the list.</p>
         <p className="text-xs text-white/50 mt-1">
-          We&apos;ll reach out when AI Review Management launches.
+          We&apos;ll reach out when {serviceName} launches.
         </p>
       </div>
     );
