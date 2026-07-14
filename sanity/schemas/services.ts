@@ -67,6 +67,42 @@ export const servicesPage = defineType({
               of: [{ type: "string" }],
             }),
             defineField({ name: "ideal", title: "Best For", type: "text" }),
+            defineField({
+              name: "tiers",
+              title: "Pricing Tiers (optional)",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  name: "tier",
+                  fields: [
+                    defineField({
+                      name: "tierName",
+                      title: "Tier Name",
+                      type: "string",
+                    }),
+                    defineField({
+                      name: "tierPrice",
+                      title: "Tier Price",
+                      type: "string",
+                    }),
+                    defineField({
+                      name: "tierDescription",
+                      title: "Tier Description",
+                      type: "text",
+                    }),
+                  ],
+                  preview: {
+                    select: { title: "tierName", subtitle: "tierPrice" },
+                  },
+                },
+              ],
+            }),
+            defineField({
+              name: "platformNote",
+              title: "Platform Note (optional)",
+              type: "text",
+            }),
           ],
           preview: {
             select: { title: "name", subtitle: "price" },

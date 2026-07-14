@@ -26,8 +26,14 @@ export const servicesPageQuery = `*[_type == "servicesPage"][0]{
   pageHeadlinePlain,
   pageHeadlineHighlight,
   pageSubheadline,
-  services[]{id, name, tagline, price, priceLabel, description, features, ideal}
+  services[]{id, name, tagline, price, priceLabel, description, features, ideal, tiers[]{tierName, tierPrice, tierDescription}, platformNote}
 }`;
+
+export type ServiceTier = {
+  tierName: string;
+  tierPrice: string;
+  tierDescription: string;
+};
 
 export type ServicesPageService = {
   id: "website" | "agentic-seo" | "ai-content" | "site-maintenance";
@@ -38,6 +44,8 @@ export type ServicesPageService = {
   description: string;
   features: string[];
   ideal: string;
+  tiers?: ServiceTier[];
+  platformNote?: string;
 };
 
 export type ServicesPageData = {
@@ -110,4 +118,41 @@ export const navigationQuery = `*[_type == "navigation"][0]{
 export type NavigationData = {
   footerDescription: string;
   footerCopyright: string;
+};
+
+export const pricingQuery = `*[_type == "pricing"][0]{
+  pageHeadline,
+  pageSubheadline,
+  bundlesHeadline,
+  bundlesSubheadline,
+  bundles[]{bundleName, tagline, includes, monthlyTotal, note},
+  faqHeadline,
+  faqs[]{question, answer},
+  bottomCtaHeadline,
+  bottomCtaBody
+}`;
+
+export type PricingBundle = {
+  bundleName: string;
+  tagline: string;
+  includes: string[];
+  monthlyTotal: string;
+  note: string;
+};
+
+export type PricingFaq = {
+  question: string;
+  answer: string;
+};
+
+export type PricingData = {
+  pageHeadline: string;
+  pageSubheadline: string;
+  bundlesHeadline: string;
+  bundlesSubheadline: string;
+  bundles: PricingBundle[];
+  faqHeadline: string;
+  faqs: PricingFaq[];
+  bottomCtaHeadline: string;
+  bottomCtaBody: string;
 };

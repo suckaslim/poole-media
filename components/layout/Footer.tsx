@@ -12,6 +12,7 @@ const SERVICE_LINKS = [
 const COMPANY_LINKS = [
   { label: "About", href: "/about" },
   { label: "Case Studies", href: "/case-studies" },
+  { label: "Pricing", href: "/pricing" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];

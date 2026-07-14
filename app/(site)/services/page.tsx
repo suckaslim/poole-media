@@ -66,42 +66,62 @@ const FALLBACK_SERVICES: ServicesPageService[] = [
   {
     id: "agentic-seo",
     name: "Agentic SEO",
-    price: "$500–$1,500/mo",
-    priceLabel: "Monthly retainer",
+    price: "$400–$750/mo",
+    priceLabel: "Monthly retainer · No contracts",
     tagline: "Continuous SEO run by AI agents, reviewed by a human.",
     description:
-      "Continuous technical SEO run by AI agents, reviewed by a senior strategist before anything ships. Keyword gap analysis, internal linking, on-page fixes, and AI-search optimization — delivered as a living system, not a quarterly report.",
+      "Continuous technical SEO run by AI agents, reviewed by a human strategist before anything ships. Keyword gap analysis, internal linking, on-page fixes, and AI-search optimization — delivered as a living system every month, not a quarterly report.",
+    tiers: [
+      {
+        tierName: "Tier 1 — Monitoring + Intelligence",
+        tierPrice: "$400/mo",
+        tierDescription:
+          "Works with any website on any platform. Monthly crawl, GSC data pull, AI analysis, keyword gap report, competitor intelligence, and full report delivered to your inbox. Recommendations for you or your developer to implement.",
+      },
+      {
+        tierName: "Tier 2 — Monitoring + Intelligence + Implementation",
+        tierPrice: "$750/mo",
+        tierDescription:
+          "Everything in Tier 1, plus fixes applied directly to your site each month via our automated pipeline. Available exclusively for sites built on the Poole Media stack.",
+      },
+    ],
     features: [
       "72-hour initial audit",
-      "Technical SEO fixes applied monthly",
+      "Monthly site crawl and technical analysis",
+      "GSC ranking and traffic data",
       "Keyword and competitor gap analysis",
-      "Internal linking optimization",
-      "AI search engine optimization (GEO + AEO)",
+      "AI search optimization (GEO + AEO)",
       "On-page content optimization",
-      "Monthly ranking and traffic summary",
+      "Internal linking improvements",
+      "Monthly report delivered to your inbox",
+      "Automated fix execution (Tier 2 / Poole Media sites only)",
       "No lock-in contracts",
     ],
     ideal:
-      "Businesses that want to rank on Google AND show up when customers ask ChatGPT, Perplexity, or Grok for recommendations.",
+      "Businesses that want to rank on Google AND show up when customers ask ChatGPT, Perplexity, or Grok for recommendations in their area.",
   },
   {
     id: "ai-content",
     name: "AI-Assisted Content",
-    price: "$300–$800/mo",
-    priceLabel: "Monthly retainer",
+    price: "$400/mo",
+    priceLabel: "Monthly · No contracts",
     tagline: "SEO-targeted content, drafted by AI, approved by you.",
     description:
-      "2–4 SEO-optimized blog posts or landing pages per month. AI-drafted, human-reviewed, client-approved before publishing. Targets keywords surfaced by the Agentic SEO service — the two compound together.",
+      "2–4 SEO-optimized blog posts or landing pages per month. AI-drafted, human-reviewed for accuracy and brand voice, client-approved before anything publishes. Works with any platform — Next.js, WordPress, Webflow, or whatever you're already on. Pairs with Agentic SEO for compounding results, or works as a standalone service if you already have a site you're happy with.",
+    platformNote: "Works with any platform",
     features: [
-      "2–4 pieces of content per month",
-      "SEO-targeted topics based on keyword research",
+      "2–4 SEO-targeted pieces per month",
+      "Topics based on real keyword research",
       "AI-drafted, human-reviewed for accuracy and brand voice",
-      "Client approval before publishing",
+      "Client approval before anything publishes",
+      "Delivered directly to your CMS as a draft (any platform)",
+      "Works with Next.js, WordPress, Webflow, and more",
       "Internal linking to support SEO",
-      "Consistent publishing cadence",
+      "Consistent monthly publishing cadence",
+      "Available as standalone or paired with Agentic SEO",
     ],
     ideal:
-      "Businesses that know they need content but don't have the time or team to produce it consistently.",
+      "Businesses that know they need consistent content but don't have the time or team to produce it — whether or not they're on a Poole Media site.",
   },
   {
     id: "site-maintenance",
@@ -215,6 +235,31 @@ export default async function ServicesPage() {
                   <p className="text-white/55 leading-relaxed mb-6">
                     {service.description}
                   </p>
+                  {service.platformNote && (
+                    <span className="inline-flex items-center rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1 text-xs font-medium text-white/50 mb-6">
+                      {service.platformNote}
+                    </span>
+                  )}
+                  {service.tiers && service.tiers.length > 0 && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                      {service.tiers.map((tier) => (
+                        <div
+                          key={tier.tierName}
+                          className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-5"
+                        >
+                          <p className="text-sm font-semibold text-white mb-1">
+                            {tier.tierName}
+                          </p>
+                          <p className="text-sm font-medium text-[#6366f1] mb-3">
+                            {tier.tierPrice}
+                          </p>
+                          <p className="text-xs text-white/50 leading-relaxed">
+                            {tier.tierDescription}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <p className="text-sm mb-8">
                     <span className="text-white/60 font-medium">
                       Best for:{" "}
@@ -228,6 +273,14 @@ export default async function ServicesPage() {
                     Get started
                     <ArrowRight className="h-4 w-4" />
                   </Link>
+                  <div className="mt-3">
+                    <Link
+                      href="/pricing#bundles"
+                      className="text-xs text-white/40 hover:text-white/70 transition-colors duration-200"
+                    >
+                      See bundle options →
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Features card */}

@@ -87,14 +87,20 @@ function FaqItem({
   );
 }
 
-export function FaqAccordion() {
+type FaqItemData = { question: string; answer: string };
+
+export function FaqAccordion({
+  items = FAQ_ITEMS,
+}: {
+  items?: FaqItemData[];
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (i: number) => setOpenIndex(openIndex === i ? null : i);
 
   return (
     <div className="border-t border-white/[0.08]">
-      {FAQ_ITEMS.map((item, i) => (
+      {items.map((item, i) => (
         <FaqItem
           key={i}
           question={item.question}
