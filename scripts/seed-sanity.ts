@@ -306,6 +306,19 @@ async function seed() {
       "Book a free 30-minute audit. We'll review your current digital presence, identify your biggest growth opportunity, and recommend the right combination of services for your goals — no commitment required.",
   });
   console.log("Seeded pricing");
+
+  await client.createOrReplace({
+    _id: "auditPage",
+    _type: "auditPage",
+    label: "Free SEO Audit",
+    headline: "See how your site scores in 30 seconds.",
+    subheadline:
+      "Enter any URL below and our agent will crawl your homepage and surface the most common SEO issues holding your site back. Free, instant, no sign-up required.",
+    postResultsCtaHeadline: "This was a homepage-only audit.",
+    postResultsCtaBody:
+      "Want us to crawl your entire site, analyze keyword gaps, check your competitors, and deliver a full report within 72 hours?",
+  });
+  console.log("Seeded auditPage");
 }
 
 seed()

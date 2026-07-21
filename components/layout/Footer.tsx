@@ -6,6 +6,7 @@ const SERVICE_LINKS = [
   { label: "Website Design and Build", href: "/services#website" },
   { label: "Agentic SEO", href: "/services#agentic-seo" },
   { label: "AI-Assisted Content", href: "/services#ai-content" },
+  { label: "Free SEO Audit", href: "/audit" },
   { label: "Site Maintenance", href: "/services#site-maintenance" },
 ];
 

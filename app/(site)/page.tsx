@@ -58,6 +58,7 @@ const webSiteSchema = {
 };
 import { SocialProof } from "@/components/sections/SocialProof";
 import { Services } from "@/components/sections/Services";
+import { AuditTeaser } from "@/components/sections/AuditTeaser";
 import { WhyPooleMedia } from "@/components/sections/WhyPooleMedia";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { CaseStudiesPreview } from "@/components/sections/CaseStudiesPreview";
@@ -111,6 +112,7 @@ export default async function HomePage() {
         headlineHighlight={whatWeDoHeadlineHighlight}
         subheadline={whatWeDoSubheadline}
       />
+      <AuditTeaser />
       <WhyPooleMedia />
       <HowItWorks />
       <CaseStudiesPreview />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import {
   Globe,
@@ -208,8 +209,8 @@ export default async function ServicesPage() {
             const Icon = ICONS[service.id];
             const flip = index % 2 === 1;
             return (
+              <Fragment key={service.id}>
               <div
-                key={service.id}
                 id={service.id}
                 className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start ${flip ? "lg:grid-flow-dense" : ""}`}
               >
@@ -300,6 +301,26 @@ export default async function ServicesPage() {
                   </div>
                 </div>
               </div>
+
+              {service.id === "agentic-seo" && (
+                <div className="rounded-2xl border border-[#6366f1]/25 bg-gradient-to-b from-[#6366f1]/[0.07] to-transparent p-8 md:p-10 text-center">
+                  <h3 className="font-display text-2xl md:text-3xl font-semibold tracking-tight text-white mb-3">
+                    Not sure if you need SEO help?
+                  </h3>
+                  <p className="text-white/55 leading-relaxed mb-6 max-w-xl mx-auto">
+                    Run a free instant audit on your homepage and see exactly
+                    what our agent finds — no sign-up required.
+                  </p>
+                  <Link
+                    href="/audit"
+                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
+                  >
+                    Run Free Audit
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              )}
+              </Fragment>
             );
           })}
         </div>

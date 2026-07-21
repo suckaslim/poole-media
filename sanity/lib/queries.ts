@@ -156,3 +156,19 @@ export type PricingData = {
   bottomCtaHeadline: string;
   bottomCtaBody: string;
 };
+
+export const auditPageQuery = `*[_type == "auditPage"][0]{
+  label,
+  headline,
+  subheadline,
+  postResultsCtaHeadline,
+  postResultsCtaBody
+}`;
+
+export type AuditPageData = {
+  label: string;
+  headline: string;
+  subheadline: string;
+  postResultsCtaHeadline: string;
+  postResultsCtaBody: string;
+};
