@@ -291,7 +291,8 @@ export function AuditTool({
         className="flex flex-col sm:flex-row gap-3"
       >
         <input
-          type="url"
+          type="text"
+          inputMode="url"
           placeholder="https://yoursite.com"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
