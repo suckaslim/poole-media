@@ -104,6 +104,26 @@ const ERROR_MESSAGES: Record<string, string> = {
   network_error: "Something went wrong. Check your connection and try again.",
 };
 
+// Accepts bare domains ("poole.media") as well as full URLs, prepending
+// https:// when no scheme is given. Returns null for anything that still
+// isn't a plausible URL afterward (no hostname, no dot in the hostname).
+function normalizeUrl(input: string): string | null {
+  if (!input) return null;
+
+  const withScheme = /^https?:\/\//i.test(input) ? input : `https://${input}`;
+
+  let parsed: URL;
+  try {
+    parsed = new URL(withScheme);
+  } catch {
+    return null;
+  }
+
+  if (!parsed.hostname.includes(".")) return null;
+
+  return withScheme;
+}
+
 function calculateScore(issues: AuditIssue[]): number {
   const deductions = issues.reduce(
     (sum, issue) => sum + (SEVERITY_DEDUCTIONS[issue.severity] ?? 0),
@@ -209,9 +229,9 @@ export function AuditTool({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const trimmed = url.trim();
+    const normalized = normalizeUrl(url.trim());
 
-    if (!/^https?:\/\//i.test(trimmed)) {
+    if (!normalized) {
       setErrorMsg(ERROR_MESSAGES.invalid_url);
       setStatus("error");
       return;
@@ -224,7 +244,7 @@ export function AuditTool({
       const res = await fetch("/api/audit/demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: trimmed }),
+        body: JSON.stringify({ url: normalized }),
       });
 
       const data: AuditApiResponse = await res.json().catch(() => ({}));
@@ -237,7 +257,7 @@ export function AuditTool({
       }
 
       const issues = data.issues?.items ?? [];
-      const domain = data.domain ?? new URL(trimmed).hostname;
+      const domain = data.domain ?? new URL(normalized).hostname;
 
       setResult({
         domain,
