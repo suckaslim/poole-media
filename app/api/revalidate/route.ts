@@ -9,7 +9,8 @@
 //   4. Dataset: production. Trigger on: Create, Update, Delete.
 //   5. Filter: leave blank to revalidate on any document change, or scope
 //      it (e.g. `_type in ["homepage", "servicesPage", "comingSoonService",
-//      "caseStudy", "navigation"]`) to avoid firing on unrelated documents.
+//      "caseStudy", "navigation", "post", "author", "category"]`) to avoid
+//      firing on unrelated documents.
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -24,6 +25,9 @@ export async function POST(req: NextRequest) {
   revalidatePath("/services");
   revalidatePath("/case-studies");
   revalidatePath("/case-studies/[slug]", "page");
+  revalidatePath("/blog");
+  revalidatePath("/blog/[slug]", "page");
+  revalidatePath("/blog/category/[slug]", "page");
 
   return NextResponse.json({
     revalidated: true,

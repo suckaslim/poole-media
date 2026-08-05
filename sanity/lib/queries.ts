@@ -172,3 +172,74 @@ export type AuditPageData = {
   postResultsCtaHeadline: string;
   postResultsCtaBody: string;
 };
+
+// ─── Blog ─────────────────────────────────────────────────────────────────
+// Types for the queries below live in @/types (BlogIndexPost, BlogPost,
+// Category) since they're shared with components outside sanity/lib.
+
+const categoryProjection = `{
+  _id,
+  title,
+  slug,
+  description,
+  color
+}`;
+
+const blogIndexProjection = `{
+  _id,
+  title,
+  slug,
+  excerpt,
+  coverImage,
+  publishedAt,
+  readingTime,
+  featured,
+  "categories": categories[]->${categoryProjection},
+  "author": author->{name, photo}
+}`;
+
+const blogPostProjection = `{
+  _id,
+  title,
+  slug,
+  excerpt,
+  coverImage,
+  publishedAt,
+  updatedAt,
+  readingTime,
+  featured,
+  body,
+  faq,
+  keyTakeaways,
+  summary,
+  targetKeyword,
+  relatedKeywords,
+  metaTitle,
+  metaDescription,
+  ogImage,
+  canonicalUrl,
+  noIndex,
+  enableArticleSchema,
+  enableFaqSchema,
+  "categories": categories[]->${categoryProjection},
+  "author": author->{name, slug, photo, bio, role, email, linkedin, twitter},
+  "relatedPosts": relatedPosts[]->${blogIndexProjection}
+}`;
+
+export const blogIndexQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc)${blogIndexProjection}`;
+
+export const blogPostBySlugQuery = `*[_type == "post" && slug.current == $slug][0]${blogPostProjection}`;
+
+export const blogPostSlugsQuery = `*[_type == "post" && defined(slug.current)]{slug}`;
+
+export const categoryBySlugQuery = `*[_type == "category" && slug.current == $slug][0]${categoryProjection}`;
+
+export const allCategoriesQuery = `*[_type == "category"] | order(title asc)${categoryProjection}`;
+
+export const postsByCategoryQuery = `*[_type == "post" && defined(slug.current) && $categorySlug in categories[]->slug.current] | order(publishedAt desc)${blogIndexProjection}`;
+
+export const categorySlugsQuery = `*[_type == "category" && defined(slug.current)]{slug}`;
+
+export const featuredPostsQuery = `*[_type == "post" && featured == true] | order(publishedAt desc)[0...3]${blogIndexProjection}`;
+
+export const relatedPostsQuery = `*[_type == "post" && defined(slug.current) && slug.current != $slug && count((categories[]->slug.current)[@ in $categorySlugs]) > 0] | order(publishedAt desc)[0...3]${blogIndexProjection}`;

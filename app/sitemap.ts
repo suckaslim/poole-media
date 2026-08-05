@@ -1,13 +1,23 @@
 import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
-import { caseStudiesQuery, type CaseStudy } from "@/sanity/lib/queries";
+import {
+  caseStudiesQuery,
+  blogIndexQuery,
+  categorySlugsQuery,
+  type CaseStudy,
+} from "@/sanity/lib/queries";
+import type { BlogIndexPost } from "@/types";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://poole.media";
 
-  const caseStudies = await client
-    .fetch<CaseStudy[]>(caseStudiesQuery)
-    .catch(() => []);
+  const [caseStudies, posts, categorySlugs] = await Promise.all([
+    client.fetch<CaseStudy[]>(caseStudiesQuery).catch(() => []),
+    client.fetch<BlogIndexPost[]>(blogIndexQuery).catch(() => []),
+    client
+      .fetch<Array<{ slug: { current: string } }>>(categorySlugsQuery)
+      .catch(() => []),
+  ]);
 
   const caseStudyEntries: MetadataRoute.Sitemap = caseStudies.map((cs) => ({
     url: `${baseUrl}/case-studies/${cs.slug}`,
@@ -15,6 +25,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: "monthly",
     priority: 0.7,
   }));
+
+  const blogPostEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug.current}`,
+    lastModified: post.publishedAt ? new Date(post.publishedAt) : new Date(),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  const blogCategoryEntries: MetadataRoute.Sitemap = categorySlugs.map(
+    ({ slug }) => ({
+      url: `${baseUrl}/blog/category/${slug.current}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+    })
+  );
 
   return [
     {
@@ -66,5 +92,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.8,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    ...blogPostEntries,
+    ...blogCategoryEntries,
   ];
 }
