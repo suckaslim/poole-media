@@ -7,6 +7,7 @@ import {
   submitContactForm,
   type ContactFormData,
 } from "@/app/actions/contact";
+import { trackEvent } from "@/lib/gtag";
 
 const SERVICE_OPTIONS = [
   "Website Design and Build",
@@ -44,6 +45,10 @@ export function ContactForm() {
     const result = await submitContactForm(form);
 
     if (result.success) {
+      trackEvent("generate_lead", {
+        form_name: "contact",
+        service_interest: form.service_interest,
+      });
       setState("success");
     } else {
       setErrorMsg(result.error);

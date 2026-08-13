@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/gtag";
 import {
   AlertCircle,
   CheckCircle2,
@@ -258,12 +259,19 @@ export function AuditTool({
 
       const issues = data.issues?.items ?? [];
       const domain = data.domain ?? new URL(normalized).hostname;
+      const score = calculateScore(issues);
+
+      trackEvent("seo_audit_completed", {
+        domain,
+        score,
+        issue_count: issues.length,
+      });
 
       setResult({
         domain,
         auditedAt: new Date(),
         issues,
-        score: calculateScore(issues),
+        score,
       });
       setStatus("success");
     } catch {

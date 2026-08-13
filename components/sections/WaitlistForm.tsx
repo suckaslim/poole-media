@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { submitWaitlistForm } from "@/app/actions/waitlist";
+import { trackEvent } from "@/lib/gtag";
 import { ArrowRight } from "lucide-react";
 
 export function WaitlistForm({ serviceName }: { serviceName: string }) {
@@ -20,6 +21,10 @@ export function WaitlistForm({ serviceName }: { serviceName: string }) {
       service_interest: serviceName,
     });
     if (result.success) {
+      trackEvent("sign_up", {
+        method: "waitlist",
+        service_interest: serviceName,
+      });
       setStatus("success");
     } else {
       setErrorMsg(result.error);

@@ -3,13 +3,7 @@
 import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-
-declare global {
-  interface Window {
-    dataLayer: unknown[];
-    gtag: (...args: unknown[]) => void;
-  }
-}
+import { trackEvent } from "@/lib/gtag";
 
 // GA4's Enhanced Measurement can auto-fire page_view on History API changes
 // independent of anything gtag.js is told client-side — even send_page_view
@@ -26,7 +20,7 @@ function GtagPageview({ gaId }: { gaId: string }) {
   useEffect(() => {
     const query = searchParams.toString();
     const url = query ? `${pathname}?${query}` : pathname;
-    window.gtag?.("event", "page_view", {
+    trackEvent("page_view", {
       page_path: url,
       page_location: window.location.href,
       page_title: document.title,
