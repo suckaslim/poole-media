@@ -3,8 +3,11 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
 import { client } from "@/sanity/lib/client";
 import { navigationQuery, type NavigationData } from "@/sanity/lib/queries";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -105,6 +108,7 @@ export default async function SiteLayout({
       suppressHydrationWarning
     >
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col">
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer
