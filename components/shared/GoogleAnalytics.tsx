@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
@@ -11,22 +11,19 @@ declare global {
   }
 }
 
-// GA4 only auto-sends a page_view from the initial `config` call — Google's
-// own docs say not to call `config` more than once per page load, since
-// repeated calls aren't reliable for tracking distinct hits. So the first
-// pageview rides the initial config call, and every route change after that
-// sends an explicit page_view event instead.
+// GA4's Enhanced Measurement can auto-fire page_view on History API changes
+// independent of anything gtag.js is told client-side — even send_page_view
+// only suppresses the *initial* auto pageview, not that listener. Rather
+// than depend on that GA4 Admin setting (Data Streams > Enhanced measurement
+// > Page changes based on browser history events) staying off, we disable
+// the automatic pageview entirely and send every page_view — including the
+// first — as an explicit event, so this component is the single source of
+// truth regardless of what's configured on the GA4 property.
 function GtagPageview({ gaId }: { gaId: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-
     const query = searchParams.toString();
     const url = query ? `${pathname}?${query}` : pathname;
     window.gtag?.("event", "page_view", {
@@ -53,7 +50,7 @@ export function GoogleAnalytics({ gaId }: { gaId: string }) {
           function gtag(){dataLayer.push(arguments);}
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', '${gaId}');
+          gtag('config', '${gaId}', { send_page_view: false });
         `}
       </Script>
       <Suspense fallback={null}>
