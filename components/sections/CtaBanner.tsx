@@ -32,17 +32,16 @@ export function CtaBanner() {
           <span className="text-gradient">AI search?</span>
         </h2>
         <p className="text-lg text-white/55 leading-relaxed max-w-xl mx-auto mb-10">
-          Book a free 30-minute audit. We&apos;ll review your digital presence,
-          identify your biggest growth opportunities, and leave you with a clear
-          action plan — no commitment required.
+          Tell us about your business and we&apos;ll start building — no call
+          required, no commitment beyond the form.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
-            href="/contact"
+            href="/get-started"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-8 py-4 text-base font-semibold text-white shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            Get Your Free Audit
+            Get Started
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link

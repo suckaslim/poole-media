@@ -263,7 +263,7 @@ export default async function PricingPage() {
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#080810] overflow-hidden">
+      <section className="relative pt-[168px] pb-20 md:pt-[200px] md:pb-24 bg-[#080810] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">

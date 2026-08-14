@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Banner } from "@/components/sections/Banner";
 import { GoogleAnalytics } from "@/components/shared/GoogleAnalytics";
 import { client } from "@/sanity/lib/client";
 import { navigationQuery, type NavigationData } from "@/sanity/lib/queries";
@@ -110,6 +111,7 @@ export default async function SiteLayout({
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col">
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <Navbar />
+        <Banner />
         <div className="flex-1">{children}</div>
         <Footer
           description={footerDescription}

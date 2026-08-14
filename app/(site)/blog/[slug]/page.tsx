@@ -163,7 +163,7 @@ export default async function BlogPostPage({
       {faqSchema && <JsonLd data={faqSchema} />}
 
       {/* Breadcrumb */}
-      <div className="pt-28 pb-4 bg-[#080810]">
+      <div className="pt-[152px] pb-4 bg-[#080810]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-white/40">
             <Link href="/" className="hover:text-white transition-colors duration-200">

@@ -7,7 +7,7 @@ function Skeleton({ className }: { className?: string }) {
 export default function CaseStudiesLoading() {
   return (
     <main>
-      <div className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-[#080810]">
+      <div className="relative pt-[168px] pb-16 md:pt-[200px] md:pb-20 bg-[#080810]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Skeleton className="h-3 w-20 mb-5" />
           <Skeleton className="h-12 w-64 mb-4" />

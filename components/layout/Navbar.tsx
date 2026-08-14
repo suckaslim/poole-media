@@ -96,22 +96,13 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop CTA group */}
-          <div className="hidden md:flex items-center gap-5">
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center">
             <Link
-              href="/contact"
-              className={cn(
-                "text-sm font-medium tracking-wide transition-colors duration-200",
-                isActive("/contact") ? "text-white" : "text-white/55 hover:text-white"
-              )}
-            >
-              Contact
-            </Link>
-            <Link
-              href="/contact"
+              href="/get-started"
               className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-brand px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/35 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
             >
-              Get Free Audit
+              Get Started
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
@@ -169,7 +160,7 @@ export function Navbar() {
               aria-label="Mobile navigation"
               className="px-4 pt-2 pb-6"
             >
-              {[...NAV_LINKS, { href: "/contact", label: "Contact" } as const].map(
+              {NAV_LINKS.map(
                 (link, i) => (
                   <motion.div
                     key={link.href}
@@ -198,10 +189,10 @@ export function Navbar() {
                 className="pt-5"
               >
                 <Link
-                  href="/contact"
+                  href="/get-started"
                   className="flex items-center justify-center gap-2 w-full rounded-lg bg-gradient-brand px-4 py-3 text-sm font-semibold text-white"
                 >
-                  Get Free Audit
+                  Get Started
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </motion.div>

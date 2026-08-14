@@ -83,6 +83,75 @@ export type Database = {
         }
         Relationships: []
       }
+      intake_submissions: {
+        Row: {
+          address: string | null
+          business_name: string
+          business_story: string | null
+          contact_name: string
+          created_at: string
+          current_site_url: string | null
+          differentiator: string | null
+          email: string
+          has_storefront: boolean
+          hours: string | null
+          id: string
+          industry: string
+          ip_address: string | null
+          notes: string | null
+          phone: string
+          service_area: string
+          services: string
+          social_links: string | null
+          status: string
+          visual_assets_note: string | null
+        }
+        Insert: {
+          address?: string | null
+          business_name: string
+          business_story?: string | null
+          contact_name: string
+          created_at?: string
+          current_site_url?: string | null
+          differentiator?: string | null
+          email: string
+          has_storefront: boolean
+          hours?: string | null
+          id?: string
+          industry: string
+          ip_address?: string | null
+          notes?: string | null
+          phone: string
+          service_area: string
+          services: string
+          social_links?: string | null
+          status?: string
+          visual_assets_note?: string | null
+        }
+        Update: {
+          address?: string | null
+          business_name?: string
+          business_story?: string | null
+          contact_name?: string
+          created_at?: string
+          current_site_url?: string | null
+          differentiator?: string | null
+          email?: string
+          has_storefront?: boolean
+          hours?: string | null
+          id?: string
+          industry?: string
+          ip_address?: string | null
+          notes?: string | null
+          phone?: string
+          service_area?: string
+          services?: string
+          social_links?: string | null
+          status?: string
+          visual_assets_note?: string | null
+        }
+        Relationships: []
+      }
       waitlist_submissions: {
         Row: {
           created_at: string

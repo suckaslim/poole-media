@@ -10,27 +10,27 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const STEPS = [
   {
     number: "01",
-    title: "Discovery & Free Audit",
+    title: "Fill Out the Form",
     description:
-      "15–30 minute call to review your current digital presence, understand your goals, and identify the biggest growth opportunities.",
+      "Tell us about your business. Takes under two minutes, no call required.",
   },
   {
     number: "02",
-    title: "Strategy & Custom Plan",
+    title: "We Build",
     description:
-      "We build a tailored roadmap — specific to your industry, market, and goals — with clear deliverables and timelines.",
+      "Your site gets built using the same stack and speed standards as every Poole Media site.",
   },
   {
     number: "03",
-    title: "Build & Launch",
+    title: "You Review",
     description:
-      "We execute with precision and speed. No endless revision cycles. Fast, clean, and live faster than you expect.",
+      "Review the build, request changes if needed.",
   },
   {
     number: "04",
-    title: "Optimize & Scale",
+    title: "Launch & Grow",
     description:
-      "Ongoing tracking, reporting, and improvement. We watch the numbers so you don't have to, and adjust to keep growth compounding.",
+      "We launch, then ongoing agentic SEO keeps you visible in search and AI results.",
   },
 ];
 
@@ -77,8 +77,8 @@ export function HowItWorks() {
             How It Works
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-white mb-5">
-            From zero to{" "}
-            <span className="text-gradient">ranked in 4 steps</span>
+            From signup to{" "}
+            <span className="text-gradient">live in 4 steps</span>
           </h2>
         </div>
 

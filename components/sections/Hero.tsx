@@ -116,7 +116,7 @@ export function Hero({
         variants={container}
         initial="hidden"
         animate="visible"
-        className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center py-32 pt-40"
+        className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center py-32 pt-[200px]"
       >
         {/* Eyebrow */}
         <motion.p
@@ -154,14 +154,14 @@ export function Hero({
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
-            href="/contact"
+            href="/get-started"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
             {ctaPrimary}
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/case-studies"
+            href="/audit"
             className="inline-flex items-center gap-2 rounded-lg border border-white/[0.15] bg-white/[0.04] px-7 py-3.5 text-base font-semibold text-white/80 hover:text-white hover:border-white/30 hover:bg-white/[0.07] transition-all duration-200"
           >
             {ctaSecondary}

@@ -24,7 +24,7 @@ const FAQ_ITEMS = [
   {
     question: "How do I get started?",
     answer:
-      "Schedule a free consultation with us. We'll review your current digital presence, discuss your goals, and build a custom roadmap — no commitment required.",
+      "Fill out our Get Started form — it takes under two minutes and tells us everything we need to begin building. No call required.",
   },
 ];
 
@@ -95,8 +95,8 @@ export function FaqPreview() {
               <span className="text-gradient">questions</span>
             </h2>
             <p className="text-lg text-white/50 leading-relaxed mb-8">
-              Have more questions? We&apos;re happy to answer anything on a free
-              discovery call.
+              Have more questions? Check the full FAQ, or reach out directly
+              and we&apos;ll get back to you.
             </p>
             <Link
               href="/faq"

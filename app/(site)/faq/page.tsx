@@ -69,7 +69,7 @@ const faqSchema = {
       name: "Can I customize my package?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Absolutely. While AI-Readiness is at the heart of everything we do, we can customize a package for your specific needs. Schedule a free consultation and we'll build a tailored roadmap around your goals.",
+        text: "Absolutely. While AI-Readiness is at the heart of everything we do, we can customize a package for your specific needs. Fill out our Get Started form and we'll build a tailored roadmap around your goals.",
       },
     },
     {
@@ -77,7 +77,7 @@ const faqSchema = {
       name: "How do I get started?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Schedule a free consultation with us. We'll review your current digital presence, discuss your business goals, and build a custom action plan — no commitment required.",
+        text: "Fill out our Get Started form — it takes under two minutes and tells us everything we need to begin building. No call required.",
       },
     },
   ],
@@ -89,7 +89,7 @@ export default function FaqPage() {
       <JsonLd data={faqSchema} />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-[#080810] overflow-hidden">
+      <section className="relative pt-[168px] pb-16 md:pt-[200px] md:pb-20 bg-[#080810] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
@@ -123,17 +123,16 @@ export default function FaqPage() {
       <section className="py-20 bg-[#060610] border-t border-white/[0.05]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight text-white mb-4">
-            Still have questions?
+            Ready to get started?
           </h2>
           <p className="text-white/55 leading-relaxed mb-8">
-            We&apos;re happy to answer anything on a free 30-minute discovery
-            call. No pitch, just answers.
+            Fill out our intake form and we&apos;ll get started on what you need right away, no call required.
           </p>
           <Link
-            href="/contact"
+            href="/get-started"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            Schedule a Free Call
+            Get Started
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

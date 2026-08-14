@@ -7,7 +7,7 @@ function Skeleton({ className }: { className?: string }) {
 export default function CaseStudyLoading() {
   return (
     <main>
-      <div className="pt-28 pb-4 bg-[#080810]">
+      <div className="pt-[152px] pb-4 bg-[#080810]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Skeleton className="h-4 w-32" />
         </div>

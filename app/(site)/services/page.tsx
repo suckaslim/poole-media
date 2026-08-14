@@ -179,7 +179,7 @@ export default async function ServicesPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#080810] overflow-hidden">
+      <section className="relative pt-[168px] pb-20 md:pt-[200px] md:pb-24 bg-[#080810] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
@@ -193,10 +193,10 @@ export default async function ServicesPage() {
             {pageSubheadline}
           </p>
           <Link
-            href="/contact"
+            href="/get-started"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            Get a Free Audit
+            Get Started
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -268,7 +268,7 @@ export default async function ServicesPage() {
                     <span className="text-white/40 italic">{service.ideal}</span>
                   </p>
                   <Link
-                    href="/contact"
+                    href="/get-started"
                     className="inline-flex items-center gap-2 rounded-lg border border-white/[0.12] bg-white/[0.04] px-5 py-2.5 text-sm font-semibold text-white/80 hover:text-white hover:border-white/25 transition-all duration-200"
                   >
                     Get started
@@ -377,15 +377,14 @@ export default async function ServicesPage() {
             Not sure which service you need?
           </h2>
           <p className="text-white/55 leading-relaxed mb-8 text-lg">
-            Book a free 30-minute audit. We&apos;ll review your current digital
-            presence and tell you exactly where your biggest growth opportunity
-            is — no commitment required.
+            Reach out and we&apos;ll help you figure out the right fit — no
+            commitment required.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 rounded-lg bg-gradient-brand px-8 py-4 text-base font-semibold text-white shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200"
           >
-            Book Free Audit
+            Contact Us
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

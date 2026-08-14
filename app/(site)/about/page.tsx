@@ -43,7 +43,7 @@ export default function AboutPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 bg-[#080810] overflow-hidden">
+      <section className="relative pt-[168px] pb-20 md:pt-[200px] md:pb-24 bg-[#080810] overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12),transparent)]" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#8b5cf6] mb-4">
@@ -209,8 +209,8 @@ export default function AboutPage() {
               client-facing businesses across Washington and beyond. Whether
               you&apos;re launching your first real website or replacing one
               that hasn&apos;t been touched in years, every engagement starts
-              the same way: a free audit of what&apos;s working, what
-              isn&apos;t, and where the fastest wins are.
+              the same way: tell us about your business and we get to work —
+              no call required.
             </p>
             <p className="text-white/55 leading-relaxed">
               Every project runs through the same four core services —

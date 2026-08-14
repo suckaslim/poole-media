@@ -23,11 +23,13 @@ export default defineType({
     defineField({
       name: "heroCtaPrimary",
       title: "Hero Primary CTA Label",
+      description: "Links to /get-started. Default: \"Get Started\".",
       type: "string",
     }),
     defineField({
       name: "heroCtaSecondary",
       title: "Hero Secondary CTA Label",
+      description: "Links to /audit. Default: \"Run Free Audit\".",
       type: "string",
     }),
     defineField({

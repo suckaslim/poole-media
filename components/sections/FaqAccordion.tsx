@@ -33,12 +33,12 @@ const FAQ_ITEMS = [
   {
     question: "Can I customize my package?",
     answer:
-      "Absolutely. While AI-Readiness is at the heart of everything we do, we can customize a package for your specific needs. Schedule a free consultation and we'll build a tailored roadmap around your goals.",
+      "Absolutely. While AI-Readiness is at the heart of everything we do, we can customize a package for your specific needs. Fill out our Get Started form and we'll build a tailored roadmap around your goals.",
   },
   {
     question: "How do I get started?",
     answer:
-      "Schedule a free consultation with us. We'll review your current digital presence, discuss your business goals, and build a custom action plan — no commitment required. You can reach us through the contact form below.",
+      "Fill out our Get Started form — it takes under two minutes and tells us everything we need to begin building. No call required. We'll follow up with a live preview of your site when it's ready to review.",
   },
 ];
 

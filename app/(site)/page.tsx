@@ -76,8 +76,8 @@ export default async function HomePage() {
   const heroSubheadline =
     data?.heroSubheadline ??
     "We build sub-2-second websites and run continuous agentic SEO — so your business gets found on Google, ChatGPT, Perplexity, and Grok.";
-  const heroCtaPrimary = data?.heroCtaPrimary ?? "Get Free Audit";
-  const heroCtaSecondary = data?.heroCtaSecondary ?? "See Our Work";
+  const heroCtaPrimary = data?.heroCtaPrimary ?? "Get Started";
+  const heroCtaSecondary = data?.heroCtaSecondary ?? "Run Free Audit";
   const statsItems = data?.statsItems?.length
     ? data.statsItems
     : [

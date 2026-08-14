@@ -106,7 +106,7 @@ export default async function CaseStudyPage({
       <JsonLd data={breadcrumbSchema} />
 
       {/* Back nav */}
-      <div className="pt-28 pb-4 bg-[#080810]">
+      <div className="pt-[152px] pb-4 bg-[#080810]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/case-studies"
@@ -192,14 +192,14 @@ export default async function CaseStudyPage({
                   Want similar results?
                 </h3>
                 <p className="text-sm text-white/50 mb-5 leading-relaxed">
-                  Book a free audit and we&apos;ll show you what&apos;s possible
-                  for your business.
+                  Tell us about your business and we&apos;ll show you
+                  what&apos;s possible.
                 </p>
                 <Link
-                  href="/contact"
+                  href="/get-started"
                   className="inline-flex items-center gap-2 w-full justify-center rounded-lg bg-gradient-brand px-4 py-3 text-sm font-semibold text-white hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
                 >
-                  Get Free Audit
+                  Get Started
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
